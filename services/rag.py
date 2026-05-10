@@ -22,7 +22,7 @@ def get_supabase() -> Client:
 
 def get_embeddings():
     return GoogleGenerativeAIEmbeddings(
-        model="text-embedding-004",
+        model="gemini-embedding-001",
         google_api_key=GEMINI_API_KEY,
     )
 
@@ -45,8 +45,8 @@ def index_pdf(pdf_path: Path) -> int:
     supabase.table("documents").delete().eq("filename", pdf_path.name).execute()
 
     embedder = get_embeddings()
-
     rows = []
+
     for chunk in chunks:
         embedding = embedder.embed_query(chunk.page_content)
         rows.append({
@@ -70,13 +70,16 @@ def list_indexed_volumes() -> List[Dict[str, Any]]:
     supabase = get_supabase()
     result = supabase.table("documents").select("filename, volume").execute()
     seen = {}
+
     for row in (result.data or []):
         fname = row.get("filename", "")
         if fname and fname not in seen:
             seen[fname] = {"filename": fname, "volume": row.get("volume", fname)}
+
     pdfs = {p.name for p in PDF_DIR.glob("*.pdf")}
     for v in seen.values():
         v["file_exists"] = v["filename"] in pdfs
+
     return list(seen.values())
 
 def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
