@@ -22,7 +22,7 @@ def get_supabase() -> Client:
 
 def get_embeddings():
     return GoogleGenerativeAIEmbeddings(
-        model="gemini-embedding-001",
+        model="gemini-embedding-2-preview",
         google_api_key=GEMINI_API_KEY,
     )
 
@@ -59,7 +59,7 @@ def index_pdf(pdf_path: Path) -> int:
 
     batch_size = 50
     for i in range(0, len(rows), batch_size):
-        supabase.table("documents").insert(rows[i:i+batch_size]).execute()
+        supabase.table("documents").insert(rows[i:i + batch_size]).execute()
 
     return len(rows)
 
@@ -70,16 +70,13 @@ def list_indexed_volumes() -> List[Dict[str, Any]]:
     supabase = get_supabase()
     result = supabase.table("documents").select("filename, volume").execute()
     seen = {}
-
     for row in (result.data or []):
         fname = row.get("filename", "")
         if fname and fname not in seen:
             seen[fname] = {"filename": fname, "volume": row.get("volume", fname)}
-
     pdfs = {p.name for p in PDF_DIR.glob("*.pdf")}
     for v in seen.values():
         v["file_exists"] = v["filename"] in pdfs
-
     return list(seen.values())
 
 def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
@@ -96,7 +93,6 @@ def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
     ).execute()
 
     docs = result.data or []
-
     if not docs:
         return {
             "answer": "Non ho trovato informazioni rilevanti nei manuali caricati.",
