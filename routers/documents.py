@@ -1,3 +1,4 @@
+import os
 import shutil
 import logging
 from fastapi import APIRouter, UploadFile, File, HTTPException
@@ -36,7 +37,6 @@ def reindex_all():
 @router.delete("/{filename}")
 def delete_document(filename: str):
     from supabase import create_client
-    import os
 
     supabase = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_KEY"])
     supabase.table("documents").delete().eq("filename", filename).execute()
