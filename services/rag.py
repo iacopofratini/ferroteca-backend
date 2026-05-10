@@ -5,92 +5,85 @@ from typing import List, Dict, Any
 import google.generativeai as genai
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from supabase import create_client
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from supabase import create_client, Client
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
-SUPABASE_URL   = os.environ.get("SUPABASE_URL", "")
-SUPABASE_KEY   = os.environ.get("SUPABASE_KEY", "")
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 
 genai.configure(api_key=GEMINI_API_KEY)
 
 PDF_DIR = Path("data/pdfs")
 PDF_DIR.mkdir(parents=True, exist_ok=True)
 
-
-def get_supabase():
+def get_supabase() -> Client:
     return create_client(SUPABASE_URL, SUPABASE_KEY)
 
-
-def get_embedding(text: str) -> List[float]:
-    result = genai.embed_content(
-        model="models/embedding-001",
-        content=text,
-        task_type="retrieval_document",
+def get_embeddings():
+    return GoogleGenerativeAIEmbeddings(
+        model="text-embedding-004",
+        google_api_key=GEMINI_API_KEY,
     )
-    return result["embedding"]
-
 
 def index_pdf(pdf_path: Path) -> int:
     loader = PyPDFLoader(str(pdf_path))
     pages = loader.load()
 
     for page in pages:
-        page.metadata["volume"]   = pdf_path.stem
+        page.metadata["volume"] = pdf_path.stem
         page.metadata["filename"] = pdf_path.name
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=800, chunk_overlap=120, separators=["\n\n", "\n", ".", " ", ""]
+        chunk_size=800,
+        chunk_overlap=120,
+        separators=["\n\n", "\n", ".", " ", ""],
     )
     chunks = splitter.split_documents(pages)
 
     supabase = get_supabase()
-
-    # Rimuovi i vecchi chunks dello stesso file
     supabase.table("documents").delete().eq("filename", pdf_path.name).execute()
+
+    embedder = get_embeddings()
 
     rows = []
     for chunk in chunks:
-        embedding = get_embedding(chunk.page_content)
+        embedding = embedder.embed_query(chunk.page_content)
         rows.append({
-            "filename":  pdf_path.name,
-            "volume":    chunk.metadata.get("volume", pdf_path.stem),
-            "page":      int(chunk.metadata.get("page", 0)),
-            "content":   chunk.page_content,
+            "filename": pdf_path.name,
+            "volume": chunk.metadata.get("volume", pdf_path.stem),
+            "page": int(chunk.metadata.get("page", 0)),
+            "content": chunk.page_content,
             "embedding": embedding,
         })
 
-    # Insert in batch da 50
     batch_size = 50
     for i in range(0, len(rows), batch_size):
         supabase.table("documents").insert(rows[i:i+batch_size]).execute()
 
     return len(rows)
 
-
 def index_all_pdfs() -> Dict[str, int]:
     return {p.name: index_pdf(p) for p in PDF_DIR.glob("*.pdf")}
 
-
 def list_indexed_volumes() -> List[Dict[str, Any]]:
     supabase = get_supabase()
-    result = (
-        supabase.table("documents")
-        .select("filename, volume")
-        .execute()
-    )
+    result = supabase.table("documents").select("filename, volume").execute()
     seen = {}
-    for row in result.data:
-        fname = row["filename"]
-        if fname not in seen:
-            seen[fname] = {"filename": fname, "volume": row["volume"]}
+    for row in (result.data or []):
+        fname = row.get("filename", "")
+        if fname and fname not in seen:
+            seen[fname] = {"filename": fname, "volume": row.get("volume", fname)}
+    pdfs = {p.name for p in PDF_DIR.glob("*.pdf")}
+    for v in seen.values():
+        v["file_exists"] = v["filename"] in pdfs
     return list(seen.values())
 
-
 def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
-    query_embedding = get_embedding(question)
-    supabase = get_supabase()
+    embedder = get_embeddings()
+    query_embedding = embedder.embed_query(question)
 
-    # Ricerca vettoriale tramite funzione RPC di Supabase pgvector
+    supabase = get_supabase()
     result = supabase.rpc(
         "match_documents",
         {
@@ -113,7 +106,7 @@ def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
 
     for doc in docs:
         volume = doc.get("volume", "Sconosciuto")
-        page   = doc.get("page", "?")
+        page = doc.get("page", "?")
         content = doc.get("content", "")
         context_parts.append(f"Fonte: {volume} pagina {page}\n{content}")
         key = f"{volume}_pagina_{page}"
