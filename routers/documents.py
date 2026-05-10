@@ -21,8 +21,9 @@ async def upload_pdf(file: UploadFile = File(...)):
     try:
         chunks = index_pdf(dest)
     except Exception as e:
-        dest.unlink(missing_ok=True)
-        raise HTTPException(status_code=500, detail=f"Errore: {str(e)}")
+    print(f"UPLOAD ERROR: {e!r}")
+    dest.unlink(missing_ok=True)
+    raise HTTPException(status_code=500, detail=f"Errore: {str(e)}")
     return {"message": "PDF indicizzato.", "filename": file.filename, "chunks": chunks}
 
 
