@@ -22,7 +22,7 @@ def get_supabase() -> Client:
 
 def get_embeddings():
     return GoogleGenerativeAIEmbeddings(
-        model="models/gemini-embedding-001",
+        model="gemini-embedding-2-preview",
         google_api_key=GEMINI_API_KEY,
     )
 
@@ -48,7 +48,10 @@ def index_pdf(pdf_path: Path) -> int:
     rows = []
 
     for chunk in chunks:
-        embedding = embedder.embed_query(chunk.page_content)
+        embedding = embedder.embed_query(
+            chunk.page_content,
+            output_dimensionality=768,
+        )
         rows.append({
             "filename": pdf_path.name,
             "volume": chunk.metadata.get("volume", pdf_path.stem),
@@ -81,7 +84,10 @@ def list_indexed_volumes() -> List[Dict[str, Any]]:
 
 def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
     embedder = get_embeddings()
-    query_embedding = embedder.embed_query(question)
+    query_embedding = embedder.embed_query(
+        question,
+        output_dimensionality=768,
+    )
 
     supabase = get_supabase()
     result = supabase.rpc(
