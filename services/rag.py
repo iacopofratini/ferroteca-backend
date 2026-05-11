@@ -21,7 +21,7 @@ def get_supabase():
 
 def get_embedding(text: str) -> List[float]:
     result = genai.embed_content(
-        model="models/text-embedding-004",
+        model="models/gemini-embedding-001",
         content=text,
         task_type="retrieval_document",
     )
@@ -34,7 +34,9 @@ def index_pdf(pdf_path: Path) -> int:
         page.metadata["volume"] = pdf_path.stem
         page.metadata["filename"] = pdf_path.name
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=800, chunk_overlap=120, separators=["\n\n", "\n", ".", " ", ""]
+        chunk_size=800,
+        chunk_overlap=120,
+        separators=["\n\n", "\n", ".", " ", ""]
     )
     chunks = splitter.split_documents(pages)
     supabase = get_supabase()
@@ -80,8 +82,13 @@ def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
     ).execute()
     docs = result.data or []
     if not docs:
-        return {"answer": "Non ho trovato informazioni rilevanti nei manuali caricati.", "sources": []}
-    context_parts, sources, seen = [], [], set()
+        return {
+            "answer": "Non ho trovato informazioni rilevanti nei manuali caricati.",
+            "sources": [],
+        }
+    context_parts = []
+    sources = []
+    seen = set()
     for doc in docs:
         volume = doc.get("volume", "Sconosciuto")
         page = doc.get("page", "?")
