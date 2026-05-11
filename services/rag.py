@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 from typing import List, Dict, Any
-
 import google.generativeai as genai
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -13,7 +12,6 @@ SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 
 genai.configure(api_key=GEMINI_API_KEY)
-
 PDF_DIR = Path("data/pdfs")
 PDF_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -21,50 +19,36 @@ def get_supabase() -> Client:
     return create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def get_embeddings():
-    return GoogleGenerativeAIEmbeddings(
-        model="models/gemini-embedding-2-preview",
-        google_api_key=GEMINI_API_KEY,
-    )
+    return GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=GEMINI_API_KEY)
+
+def embed_texts(texts: List[str]) -> List[List[float]]:
+    return get_embeddings().embed_documents(texts)
 
 def index_pdf(pdf_path: Path) -> int:
     loader = PyPDFLoader(str(pdf_path))
     pages = loader.load()
-
     for page in pages:
         page.metadata["volume"] = pdf_path.stem
         page.metadata["filename"] = pdf_path.name
-
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=800,
-        chunk_overlap=120,
-        separators=["\n\n", "\n", ".", " ", ""],
-    )
+    splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=120, separators=["\n\n", "\n", ".", " ", ""])
     chunks = splitter.split_documents(pages)
-
     supabase = get_supabase()
     supabase.table("documents").delete().eq("filename", pdf_path.name).execute()
-
-    embedder = get_embeddings()
+    texts = [c.page_content for c in chunks]
+    embeddings = embed_texts(texts)
     rows = []
-
-    for chunk in chunks:
-        embedding = embedder.embed_query(
-            chunk.page_content,
-            output_dimensionality=768,
-        )
+    for i, c in enumerate(chunks):
         rows.append({
+            "content": c.page_content,
+            "embedding": embeddings[i],
             "filename": pdf_path.name,
-            "volume": chunk.metadata.get("volume", pdf_path.stem),
-            "page": int(chunk.metadata.get("page", 0)),
-            "content": chunk.page_content,
-            "embedding": embedding,
+            "volume": pdf_path.stem,
+            "page": c.metadata.get("page", 0),
         })
-
     batch_size = 50
     for i in range(0, len(rows), batch_size):
-        supabase.table("documents").insert(rows[i:i + batch_size]).execute()
-
-    return len(rows)
+        supabase.table("documents").insert(rows[i:i+batch_size]).execute()
+    return len(chunks)
 
 def index_all_pdfs() -> Dict[str, int]:
     return {p.name: index_pdf(p) for p in PDF_DIR.glob("*.pdf")}
@@ -72,71 +56,12 @@ def index_all_pdfs() -> Dict[str, int]:
 def list_indexed_volumes() -> List[Dict[str, Any]]:
     supabase = get_supabase()
     result = supabase.table("documents").select("filename, volume").execute()
-    seen = {}
+    volumes = {}
     for row in (result.data or []):
         fname = row.get("filename", "")
-        if fname and fname not in seen:
-            seen[fname] = {"filename": fname, "volume": row.get("volume", fname)}
+        if fname and fname not in volumes:
+            volumes[fname] = {"filename": fname, "volume": row.get("volume", fname)}
     pdfs = {p.name for p in PDF_DIR.glob("*.pdf")}
-    for v in seen.values():
+    for v in volumes.values():
         v["file_exists"] = v["filename"] in pdfs
-    return list(seen.values())
-
-def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
-    embedder = get_embeddings()
-    query_embedding = embedder.embed_query(
-        question,
-        output_dimensionality=768,
-    )
-
-    supabase = get_supabase()
-    result = supabase.rpc(
-        "match_documents",
-        {
-            "query_embedding": query_embedding,
-            "match_count": top_k,
-        },
-    ).execute()
-
-    docs = result.data or []
-    if not docs:
-        return {
-            "answer": "Non ho trovato informazioni rilevanti nei manuali caricati.",
-            "sources": [],
-        }
-
-    context_parts = []
-    sources = []
-    seen = set()
-
-    for doc in docs:
-        volume = doc.get("volume", "Sconosciuto")
-        page = doc.get("page", "?")
-        content = doc.get("content", "")
-        context_parts.append(f"Fonte: {volume} pagina {page}\n{content}")
-        key = f"{volume}_pagina_{page}"
-        if key not in seen:
-            sources.append({"volume": volume, "page": page})
-            seen.add(key)
-
-    context = "\n---\n".join(context_parts)
-    prompt = f"""Sei Ferroteca, assistente esperto di procedure ferroviarie italiane.
-Rispondi SOLO dai documenti forniti. Se non trovi l'informazione di' "Non presente nei manuali caricati."
-Non usare conoscenza esterna. Cita sempre volume e pagina.
-
-DOCUMENTI:
-{context}
-
-DOMANDA: {question}
-
-RISPOSTA:
-1. Sintesi
-2. Procedura dettagliata
-3. Fonte"""
-
-    model = genai.GenerativeModel(
-        "gemini-2.5-flash",
-        generation_config={"temperature": 0.1, "max_output_tokens": 8192},
-    )
-    answer = model.generate_content(prompt).text
-    return {"answer": answer, "sources": sources}
+    return list(volumes.values())
