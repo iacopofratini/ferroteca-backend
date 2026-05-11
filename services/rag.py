@@ -21,11 +21,7 @@ def get_supabase():
     return create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def get_embedding(text: str) -> List[float]:
-    result = genai.embed_content(
-        model=EMBEDDING_MODEL,
-        content=text,
-        task_type="retrieval_document",
-    )
+    result = genai.embed_content(model=EMBEDDING_MODEL, content=text, task_type="retrieval_document")
     return result["embedding"]
 
 def index_pdf(pdf_path: Path) -> int:
@@ -40,13 +36,7 @@ def index_pdf(pdf_path: Path) -> int:
     supabase.table("documents").delete().eq("filename", pdf_path.name).execute()
     rows = []
     for chunk in chunks:
-        rows.append({
-            "filename": pdf_path.name,
-            "volume": chunk.metadata.get("volume", pdf_path.stem),
-            "page": int(chunk.metadata.get("page", 0)),
-            "content": chunk.page_content,
-            "embedding": get_embedding(chunk.page_content),
-        })
+        rows.append({"filename": pdf_path.name, "volume": chunk.metadata.get("volume", pdf_path.stem), "page": int(chunk.metadata.get("page", 0)), "content": chunk.page_content, "embedding": get_embedding(chunk.page_content)})
     for i in range(0, len(rows), 50):
         supabase.table("documents").insert(rows[i:i+50]).execute()
     return len(rows)
@@ -70,6 +60,15 @@ def list_indexed_volumes() -> List[Dict[str, Any]]:
             seen[fname] = {"filename": fname, "volume": row["volume"]}
     return list(seen.values())
 
+def debug_index_status() -> Dict[str, Any]:
+    supabase = get_supabase()
+    result = supabase.table("documents").select("filename, volume, page").execute()
+    rows = result.data or []
+    filenames = sorted({r.get("filename", "") for r in rows if r.get("filename")})
+    volumes = sorted({r.get("volume", "") for r in rows if r.get("volume")})
+    pdfs = sorted([p.name for p in PDF_DIR.glob("*.pdf")])
+    return {"supabase_rows": len(rows), "distinct_filenames": filenames, "distinct_volumes": volumes, "local_pdfs": pdfs, "local_pdf_count": len(pdfs), "missing_in_supabase": [p for p in pdfs if p not in filenames], "supabase_url_set": bool(SUPABASE_URL), "supabase_key_set": bool(SUPABASE_KEY), "gemini_key_set": bool(GEMINI_API_KEY)}
+
 def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
     query_embedding = get_embedding(question)
     supabase = get_supabase()
@@ -88,9 +87,7 @@ def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
             sources.append({"volume": volume, "page": page})
             seen.add(key)
     context = "\n---\n".join(context_parts)
-    prompt = f"""Sei Ferroteca, assistente esperto di procedure ferroviarie italiane.
-Rispondi SOLO dai documenti forniti. Se non trovi l'informazione di' "Non presente nei manuali caricati."
-Non usare conoscenza esterna. Cita sempre volume e pagina.
+    prompt = f"""Sei Ferroteca, assistente esperto di procedure ferroviarie italiane. Rispondi SOLO dai documenti forniti. Se non trovi l'informazione di' "Non presente nei manuali caricati." Non usare conoscenza esterna. Cita sempre volume e pagina.
 
 DOCUMENTI:
 {context}
