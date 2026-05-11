@@ -16,7 +16,6 @@ genai.configure(api_key=GEMINI_API_KEY)
 PDF_DIR = Path("data/pdfs")
 PDF_DIR.mkdir(parents=True, exist_ok=True)
 EMBEDDING_MODEL = "models/gemini-embedding-001"
-EMBEDDING_DIM = 3072
 
 def get_supabase():
     return create_client(SUPABASE_URL, SUPABASE_KEY)
@@ -54,7 +53,7 @@ def index_pdf(pdf_path: Path) -> int:
 
 def index_all_pdfs() -> Dict[str, int]:
     results = {}
-    for p in PDF_DIR.glob("*.pdf"):
+    for p in sorted(PDF_DIR.glob("*.pdf")):
         try:
             results[p.name] = index_pdf(p)
         except Exception:
