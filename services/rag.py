@@ -53,6 +53,43 @@ def index_pdf(pdf_path: Path) -> int:
 def index_all_pdfs() -> Dict[str, int]:
     return {p.name: index_pdf(p) for p in PDF_DIR.glob("*.pdf")}
 
+def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
+    embedder = get_embeddings()
+    q_embedding = embedder.embed_query(question)
+    supabase = get_supabase()
+    result = supabase.rpc("match_documents", {
+        "query_embedding": q_embedding,
+        "match_count": top_k
+    }).execute()
+    docs = result.data or []
+    if not docs:
+        return {"answer": "Non ho trovato informazioni rilevanti nei manuali caricati.", "sources": []}
+    context_parts, sources, seen = [], [], set()
+    for doc in docs:
+        volume = doc.get("volume", "Sconosciuto")
+        page = doc.get("page", "?")
+        context_parts.append(f"[Fonte: {volume} — pagina {page}]\n{doc['content']}")
+        key = f"{volume} — pagina {page}"
+        if key not in seen:
+            sources.append({"volume": volume, "page": page})
+            seen.add(key)
+    context = "\n\n---\n\n".join(context_parts)
+    prompt = f"""Sei Ferroteca, assistente esperto di procedure ferroviarie italiane.
+Rispondi SOLO dai documenti forniti. Se non trovi l'informazione dì: "Non presente nei manuali caricati."
+Non usare conoscenza esterna. Cita sempre volume e pagina.
+
+DOCUMENTI:
+{context}
+
+DOMANDA: {question}
+
+RISPOSTA (1. Sintesi 2. Procedura dettagliata 3. Fonte):"""
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        generation_config={"temperature": 0.1, "max_output_tokens": 8192}
+    )
+    return {"answer": model.generate_content(prompt).text, "sources": sources}
+
 def list_indexed_volumes() -> List[Dict[str, Any]]:
     supabase = get_supabase()
     result = supabase.table("documents").select("filename, volume").execute()
