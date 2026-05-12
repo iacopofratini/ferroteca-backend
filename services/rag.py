@@ -25,7 +25,7 @@ def get_supabase() -> Client:
 
 def get_embeddings():
     return GoogleGenerativeAIEmbeddings(
-        model="models/embedding-001",
+        model="models/text-embedding-004",
         google_api_key=GEMINI_API_KEY,
     )
 
