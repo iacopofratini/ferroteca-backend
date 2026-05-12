@@ -6,13 +6,16 @@ from services.rag import index_pdf, index_all_pdfs, list_indexed_volumes, debug_
 
 router = APIRouter()
 
+
 @router.get("/")
 def get_documents():
     return list_indexed_volumes()
 
+
 @router.get("/debug")
 def debug_documents():
     return debug_index_status()
+
 
 @router.post("/upload")
 async def upload_pdf(file: UploadFile = File(...)):
@@ -28,10 +31,12 @@ async def upload_pdf(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail=f"Errore: {str(e)}")
     return {"message": "PDF indicizzato.", "filename": file.filename, "chunks": chunks}
 
+
 @router.post("/reindex")
 def reindex_all():
     results = index_all_pdfs()
     return {"message": "Re-indicizzazione completata.", "files": results, "total_chunks": sum(results.values())}
+
 
 @router.delete("/{filename}")
 def delete_document(filename: str):
