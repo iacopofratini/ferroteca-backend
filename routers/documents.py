@@ -1,8 +1,7 @@
 import shutil
 from pathlib import Path
-
 from fastapi import APIRouter, UploadFile, File, HTTPException
-from services.rag import index_pdf, index_all_pdfs, list_indexed_volumes, debug_index_status, PDF_DIR
+from services.rag import index_pdf, index_all_pdfs, list_indexed_volumes, PDF_DIR
 
 router = APIRouter()
 
@@ -12,14 +11,9 @@ def get_documents():
     return list_indexed_volumes()
 
 
-@router.get("/debug")
-def debug_documents():
-    return debug_index_status()
-
-
 @router.post("/upload")
 async def upload_pdf(file: UploadFile = File(...)):
-    if not file.filename.lower().endswith(".pdf"):
+    if not file.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Solo file PDF accettati.")
     dest = PDF_DIR / file.filename
     with open(dest, "wb") as f:
@@ -42,12 +36,9 @@ def reindex_all():
 def delete_document(filename: str):
     from supabase import create_client
     import os
-
     supabase = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_KEY"])
     supabase.table("documents").delete().eq("filename", filename).execute()
-
     pdf_path = PDF_DIR / filename
     if pdf_path.exists():
         pdf_path.unlink()
-
     return {"message": f"{filename} rimosso."}
