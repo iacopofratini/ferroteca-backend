@@ -2,7 +2,8 @@ import os
 from pathlib import Path
 from typing import List, Dict, Any
 
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -12,7 +13,7 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 SUPABASE_URL   = os.environ.get("SUPABASE_URL", "")
 SUPABASE_KEY   = os.environ.get("SUPABASE_KEY", "")
 
-genai.configure(api_key=GEMINI_API_KEY)
+_genai_client = genai.Client(api_key=GEMINI_API_KEY)
 
 PDF_DIR = Path("data/pdfs")
 PDF_DIR.mkdir(parents=True, exist_ok=True)
@@ -115,11 +116,15 @@ DOMANDA: {question}
 
 RISPOSTA (1. Sintesi 2. Procedura dettagliata 3. Fonte):"""
 
-    model = genai.GenerativeModel(
-        "gemini-2.5-flash",
-        generation_config={"temperature": 0.1, "max_output_tokens": 8192},
+    response = _genai_client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            temperature=0.1,
+            max_output_tokens=8192,
+        ),
     )
-    return {"answer": model.generate_content(prompt).text, "sources": sources}
+    return {"answer": response.text, "sources": sources}
 
 
 def list_indexed_volumes() -> List[Dict[str, Any]]:
