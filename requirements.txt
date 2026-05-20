@@ -1,7 +1,7 @@
 fastapi==0.115.0
 uvicorn==0.30.6
 python-multipart==0.0.9
-google-generativeai==0.8.3
+google-genai>=1.7.0
 langchain==0.3.7
 langchain-community==0.3.7
 langchain-google-genai>=2.1.0
