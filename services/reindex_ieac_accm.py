@@ -5,12 +5,12 @@ from pathlib import Path
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from supabase import create_client, Client
+
+from services import llm_provider
 
 load_dotenv()
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 BASE_DIR = Path(__file__).resolve().parent
@@ -20,13 +20,6 @@ PDF_DIR.mkdir(parents=True, exist_ok=True)
 
 def get_supabase() -> Client:
     return create_client(SUPABASE_URL, SUPABASE_KEY)
-
-
-def get_embeddings():
-    return GoogleGenerativeAIEmbeddings(
-    model="models/gemini-embedding-001",
-    google_api_key=GEMINI_API_KEY,
-)
 
 
 def reindex_pdf(pdf_name: str, batch_size: int = 10, sleep_between_batches: float = 1.2, embed_pause: float = 0.8) -> int:
@@ -50,7 +43,6 @@ def reindex_pdf(pdf_name: str, batch_size: int = 10, sleep_between_batches: floa
     supabase = get_supabase()
     print(f"Skipping delete for {pdf_path.name}")
 
-    embedder = get_embeddings()
     rows = []
     pending_texts = []
     pending_chunks = []
@@ -59,28 +51,19 @@ def reindex_pdf(pdf_name: str, batch_size: int = 10, sleep_between_batches: floa
         nonlocal rows, pending_texts, pending_chunks
         if not pending_texts:
             return
-        while True:
-            try:
-                embs = embedder.embed_documents(pending_texts)
-                for idx, emb in enumerate(embs):
-                    c = pending_chunks[idx]
-                    rows.append({
-                        "content": c.page_content,
-                        "embedding": emb,
-                        "filename": pdf_path.name,
-                        "volume": pdf_path.stem,
-                        "page": c.metadata.get("page", 0),
-                    })
-                pending_texts = []
-                pending_chunks = []
-                time.sleep(embed_pause)
-                break
-            except Exception as e:
-                if "429" in str(e):
-                    print("429 from Gemini, waiting 60s...")
-                    time.sleep(60)
-                    continue
-                raise
+        embs = llm_provider.embed(pending_texts)
+        for idx, emb in enumerate(embs):
+            c = pending_chunks[idx]
+            rows.append({
+                "content": c.page_content,
+                "embedding": emb,
+                "filename": pdf_path.name,
+                "volume": pdf_path.stem,
+                "page": c.metadata.get("page", 0),
+            })
+        pending_texts = []
+        pending_chunks = []
+        time.sleep(embed_pause)
 
     for c in chunks:
         pending_texts.append(c.page_content)

@@ -7,16 +7,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterator, List, Dict, Any
 
-import google.generativeai as genai
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from supabase import Client, create_client
+
+from services import llm_provider
 
 # ---------------------------------------------------------------------------
 # Variabili ambiente obbligatorie
 # ---------------------------------------------------------------------------
-GEMINI_API_KEY          = os.environ.get("GEMINI_API_KEY", "")
 SUPABASE_URL            = os.environ.get("SUPABASE_URL", "")
 SUPABASE_SERVICE_ROLE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 DOCS_ROOT_FOLDER        = Path(os.environ.get("DOCS_ROOT_FOLDER", "")).expanduser().resolve()
@@ -27,10 +26,7 @@ if not SUPABASE_SERVICE_ROLE_KEY:
     raise RuntimeError("SUPABASE_SERVICE_ROLE_KEY non impostata")
 if not os.environ.get("DOCS_ROOT_FOLDER"):
     raise RuntimeError("DOCS_ROOT_FOLDER non impostata")
-if not GEMINI_API_KEY:
-    raise RuntimeError("GEMINI_API_KEY non impostata")
 
-genai.configure(api_key=GEMINI_API_KEY)
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
 CHUNK_SIZE    = 800
@@ -110,15 +106,8 @@ def upsert_registry(doc: DocumentFile) -> None:
 # ---------------------------------------------------------------------------
 # Embedding
 # ---------------------------------------------------------------------------
-def get_embedder() -> GoogleGenerativeAIEmbeddings:
-    return GoogleGenerativeAIEmbeddings(
-        model="models/embedding-001",
-        google_api_key=GEMINI_API_KEY
-    )
-
-
 def embed_texts(texts: List[str]) -> List[List[float]]:
-    return get_embedder().embed_documents(texts)
+    return llm_provider.embed(texts)
 
 
 # ---------------------------------------------------------------------------

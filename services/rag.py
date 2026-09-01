@@ -2,18 +2,14 @@ import os
 from pathlib import Path
 from typing import List, Dict, Any
 
-from google import genai
-from google.genai import types
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from supabase import create_client, Client
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
-SUPABASE_URL   = os.environ.get("SUPABASE_URL", "")
-SUPABASE_KEY   = os.environ.get("SUPABASE_KEY", "")
+from services import llm_provider
 
-_genai_client = genai.Client(api_key=GEMINI_API_KEY)
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 
 PDF_DIR = Path("data/pdfs")
 PDF_DIR.mkdir(parents=True, exist_ok=True)
@@ -23,16 +19,8 @@ def get_supabase() -> Client:
     return create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
-def get_embeddings() -> GoogleGenerativeAIEmbeddings:
-    return GoogleGenerativeAIEmbeddings(
-        model="models/gemini-embedding-001",
-        google_api_key=GEMINI_API_KEY,
-    )
-
-
 def embed_texts(texts: List[str]) -> List[List[float]]:
-    embedder = get_embeddings()
-    return embedder.embed_documents(texts, output_dimensionality=768)
+    return llm_provider.embed(texts)
 
 
 def index_pdf(pdf_path: Path) -> int:
@@ -78,8 +66,7 @@ def index_all_pdfs() -> Dict[str, int]:
 
 
 def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
-    embedder    = get_embeddings()
-    q_embedding = embedder.embed_query(question, output_dimensionality=768)
+    q_embedding = llm_provider.embed([question])[0]
 
     supabase = get_supabase()
     result   = supabase.rpc(
@@ -116,15 +103,8 @@ DOMANDA: {question}
 
 RISPOSTA (1. Sintesi 2. Procedura dettagliata 3. Fonte):"""
 
-    response = _genai_client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            temperature=0.1,
-            max_output_tokens=8192,
-        ),
-    )
-    return {"answer": response.text, "sources": sources}
+    answer = llm_provider.generate(prompt)
+    return {"answer": answer, "sources": sources}
 
 
 def list_indexed_volumes() -> List[Dict[str, Any]]:
