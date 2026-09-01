@@ -109,6 +109,46 @@ stato "da gestire").
 **Prossimo passo:** nessuno per questo intervento; i due file restano in
 attesa di rotazione/eliminazione da parte di Iacopo.
 
+## 2026-09-01 (continua) — Lavoro autonomo in attesa della revisione di data/pdfs
+
+Iacopo ha rimandato a domani la revisione manuale di `data/pdfs/`; nel
+frattempo ho proseguito solo su cose che non richiedevano una sua decisione.
+
+**Deciso:** pinnare in `requirements.txt` le dipendenze non ancora fissate
+(`google-genai`, `langchain-google-genai`, `supabase`, `httpx`), risolvendo
+le versioni in un ambiente pulito.
+**Perché:** punto 6 dell'audit — versioni con `>=` possono rompere il
+backend in produzione con un aggiornamento a monte senza che nessuno abbia
+cambiato una riga di codice.
+**Fatto:** versioni risolte due volte per conferma (Python 3.14 e 3.12,
+stesso risultato): `google-genai==2.21.0`, `langchain-google-genai==2.1.5`,
+`supabase==2.31.0`, `httpx==0.28.1`.
+**Da sapere:** risolte con Python 3.12/3.14 in locale, non 3.11 come il
+`Dockerfile` di produzione (Python 3.11 non disponibile su questa macchina).
+Alta probabilità che siano identiche (nessun marker di versione Python nei
+requisiti di questi pacchetti), ma da confermare al prossimo deploy reale,
+non garantito al 100%.
+
+**Deciso:** scrivere `docs/DECISIONS.md` (log ADR) e `docs/BLUEPRINT.md`
+(architettura + schema reale + incognite per l'adozione aziendale) — punto
+7 del piano.
+**Perché:** erano tra i pochi compiti del piano eseguibili senza bisogno di
+input di Iacopo in tempo reale; sono per lo più la messa per iscritto di
+decisioni già prese in questa sessione o nei vincoli di partenza.
+**Fatto:** entrambi i file creati. Segnato esplicitamente cosa è "deciso e
+fatto" vs "proposto, non ancora eseguito" (es. monorepo, autenticazione),
+per non presentare come completo qualcosa che non lo è. Schema del database
+in BLUEPRINT.md verificato via query diretta a Supabase (solo due tabelle
+esistono oggi: `documents`, `sync_registry` — confermato l'elenco completo,
+non solo quelle già note).
+
+**Verificato (non un'azione, solo un controllo):** il frontmatter Hugging
+Face Space in `README.md` (`sdk: docker`, `app_port: 7860`) è ancora
+presente; nessun remote git verso Hugging Face configurato (solo GitHub →
+Render). Non posso stabilire da qui se esista uno Space HF davvero attivo
+sul tuo account — te lo chiedo prima di toccare il file, come richiesto
+dall'audit.
+
 **Nota — venv rotto:** `ferroteca-backend/venv/bin/python3` è un symlink
 rotto che punta a `/Users/iacopofratini/venv/bin/python3` (percorso fuori
 dal progetto, non più esistente). L'ambiente virtuale locale non è
