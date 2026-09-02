@@ -154,3 +154,45 @@ rotto che punta a `/Users/iacopofratini/venv/bin/python3` (percorso fuori
 dal progetto, non più esistente). L'ambiente virtuale locale non è
 utilizzabile così com'è; da ricreare quando serve eseguire script Python in
 locale (non necessario per il lavoro di oggi, fatto via REST/curl).
+
+## 2026-09-02 — Merge del branch di consolidamento in `main` e push
+
+**Deciso:** fondere `chore/llm-provider-consolidation` in `main` e pubblicare
+su GitHub (fine del lavoro isolato su branch, `main` torna a essere la base
+attiva su cui lavorare).
+**Perché:** Iacopo ha confermato esplicitamente dopo aver visto il diff e un
+controllo di rischio (variabili d'ambiente invariate, `python-dotenv`
+presente come dipendenza transitiva, nessuna funzione mancante, Python 3.11
+di produzione compatibile con le versioni pinnate).
+
+**Trovato durante il push (non previsto):** `origin/main` su GitHub conteneva
+35 commit mai scaricati in locale (`914b85d..3bba5e9`), fatti direttamente
+dall'editor web di GitHub tra il 10 e il 20 maggio 2026 — pattern
+riconoscibile (un file alla volta, messaggio automatico "Update X.py").
+Il riferimento locale a `origin/main` era rimasto fermo a `914b85d` perché
+non era mai stato rifatto un `fetch` da allora. Push iniziale respinto da
+Git stesso (nessun danno: nessuna sovrascrittura avvenuta).
+**Verificato prima di risolvere:** confronto riga per riga tra la versione
+di maggio di `services/rag.py`/`requirements.txt` e quella di settembre —
+identiche nella logica (stessa migrazione a `google-genai`, stesse funzioni
+`list_indexed_volumes`/`debug_index_status` byte-per-byte), l'unica
+differenza è che settembre estrae il codice Gemini in
+`services/llm_provider.py`; i pin esatti di settembre rientrano tutti negli
+intervalli larghi (`>=`) scelti a maggio. Non erano due soluzioni in
+competizione ma la stessa correzione fatta due volte per due strade diverse.
+**Fatto:** merge di `origin/main` risolto tenendo la versione di settembre
+per i due file in conflitto (nessuna perdita di modifiche, verificato con
+diff a zero righe residue dopo la risoluzione); pubblicato su GitHub
+(`main` ora a `e4c37cf`). Render dovrebbe ripartire in automatico.
+**Da sapere:** non è chiaro chi/quando abbia fatto quei 35 commit di maggio
+via editor web (attribuiti all'account GitHub di Iacopo) — non blocca nulla
+ora, ma segnalato per evitare che si ripeta un altro ramo di lavoro "invisibile"
+scollegato dai fetch locali.
+**Prossimo passo:** confermare che Render ha effettivamente ridistribuito
+`e4c37cf` e che l'app risponde; poi procedere col ricaricamento pulito di
+`data/pdfs/` (già riorganizzata da Iacopo in testi principali + sottocartelle
+di arricchimento `DE`/`DGI`/`IMPATTI`/`NOTE`/`PE`/`RFI-FILE NORMATIVI MISTI` —
+vedi nota separata: la distinzione tra i due livelli è già un campo
+`category` in `sync_documents.py`, ma nessun codice usa ancora quel campo per
+trattare l'arricchimento come integrazione al testo principale invece che
+come fonte a sé stante — da progettare).
