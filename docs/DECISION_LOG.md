@@ -184,10 +184,11 @@ competizione ma la stessa correzione fatta due volte per due strade diverse.
 per i due file in conflitto (nessuna perdita di modifiche, verificato con
 diff a zero righe residue dopo la risoluzione); pubblicato su GitHub
 (`main` ora a `e4c37cf`). Render dovrebbe ripartire in automatico.
-**Da sapere:** non è chiaro chi/quando abbia fatto quei 35 commit di maggio
-via editor web (attribuiti all'account GitHub di Iacopo) — non blocca nulla
-ora, ma segnalato per evitare che si ripeta un altro ramo di lavoro "invisibile"
-scollegato dai fetch locali.
+**Chiarito (2026-09-02, poco dopo):** i 35 commit di maggio via editor web
+erano di Iacopo stesso, su richiesta di una sessione Claude precedente che
+lo guidava a modificare righe direttamente su GitHub durante lo sviluppo —
+non un'anomalia. Resta comunque vero che quel modo di lavorare crea rami di
+modifiche scollegati dai `fetch` locali; da tenere a mente se ricapita.
 **Prossimo passo:** confermare che Render ha effettivamente ridistribuito
 `e4c37cf` e che l'app risponde; poi procedere col ricaricamento pulito di
 `data/pdfs/` (già riorganizzata da Iacopo in testi principali + sottocartelle
