@@ -3,3 +3,5 @@ __pycache__/
 .env
 data/pdfs/
 *.pdf
+venv/
+.DS_Store
