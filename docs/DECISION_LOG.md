@@ -243,3 +243,54 @@ di questo lavoro.
 lo schema Supabase useranno `enrichment_mapping.json` per includere
 l'arricchimento nella risposta — non ancora implementato, da discutere con
 Iacopo prima di toccare il motore live.
+
+**Confermato (2026-09-03, stesso giorno):** Iacopo conferma che i 46/52
+documenti mancanti sono un buco aziendale reale (cartella locale = copia
+integrale di quella condivisa), non un problema di questo lavoro — restano
+segnalati in AUDIT.md 3.7, nessuna azione da parte mia. Confermato anche
+l'uso di API esterne economiche per lavori massivi come pratica generale,
+non solo per Ferroteca — annotata in `~/claude-config/WORKING_PRACTICES.md`.
+
+**Deciso:** implementare in `services/rag.py` il recupero dell'arricchimento
+durante `ask()`, usando solo i 98 collegamenti "certi" (da citazione), non
+i 125 "suggeriti dal contenuto" (restano in sospeso finché non c'è un
+controllo a campione).
+**Fatto:** aggiunte `load_enrichment_map()`, `enrichment_file_paths()`,
+`index_enrichment_files()`, `fetch_document_chunks()`; `ask()` ora, per ogni
+testo principale trovato tra i risultati, recupera anche gli arricchimenti
+collegati e li passa a Gemini in una sezione separata "AGGIORNAMENTI
+CORRELATI"; `list_indexed_volumes()` filtra l'arricchimento per non farlo
+comparire come libro a sé nella libreria dell'app.
+**Bug trovati e corretti prima di eseguire:**
+1. Una f-string con una barra rovesciata dentro le graffe — sintassi valida
+   solo da Python 3.12, ma Render usa 3.11: avrebbe mandato in crash l'app
+   al primo avvio. Trovato rileggendo il codice, non in produzione.
+2. Verificato (con un inserimento di prova poi cancellato) che la RPC
+   `match_documents` restituisce davvero la colonna `filename` — l'ipotesi
+   su cui si basa tutto il meccanismo di collegamento.
+
+**Fatto — indicizzazione reale eseguita (2026-09-03):** 29 testi principali
++ 98 arricchimenti indicizzati su Supabase in produzione (tabella
+`documents` svuotata il 2026-09-01, ora ripopolata). Costo reale contenuto
+(budget approvato: speso in API). Durante l'esecuzione, un file conteneva un
+carattere nullo (NUL, \x00) nel testo estratto, rifiutato da Postgres — corretto
+ripulendo il testo prima dell'inserimento (`index_pdf`), poi rieseguito da
+capo (idempotente: cancella e reinserisce per filename, nessun duplicato).
+**Trovati due problemi reali durante la verifica finale:**
+1. **2 testi principali e 63 arricchimenti "certi" producono 0 pezzi di
+   testo** — sono scansioni immagine senza livello di testo sotto,
+   invisibili alla ricerca finché non c'è OCR (non implementato, vedi
+   AUDIT.md 3.8). La mappatura dei collegamenti resta corretta, ma il
+   contenuto reale recuperabile è molto meno del previsto.
+2. **Bug preesistente (non introdotto oggi) trovato durante il test**:
+   `list_indexed_volumes()`/`debug_index_status()` leggevano la tabella
+   senza paginazione — Supabase tronca silenziosamente a 1000 righe per
+   richiesta. Con sole centinaia di righe (prima di oggi) il bug era
+   invisibile; con 26.920 righe reali la libreria mostrava 9 volumi invece
+   di 27. Corretto con lettura paginata (`fetch_all_rows`), verificato:
+   ora 27/27 volumi visibili, 26.920 pezzi totali confermati.
+**Verificato funzionante:** una domanda di prova reale (`ask()`) ha
+prodotto una risposta corretta con fonti multiple e formattazione attesa.
+**Prossimo passo:** commit e push del codice; poi, se Iacopo conferma,
+valutare separatamente un passaggio OCR per i documenti scansionati (costo
+e portata da stimare a parte, non incluso in questo lavoro).

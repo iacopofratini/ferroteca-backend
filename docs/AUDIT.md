@@ -72,6 +72,29 @@ risolvibile da codice — va segnalato/recuperato in azienda. Elenco completo
 in `docs/enrichment_mapping.md`, sezione "Documenti citati ma assenti dalla
 cartella locale".
 
+### 3.8 PDF scansionati senza testo estraibile — invisibili alla ricerca
+
+L'indicizzazione usa `PyPDFLoader` (estrazione di testo digitale), senza
+OCR. Confermato con l'indicizzazione reale del 2026-09-03: **2 dei 29 testi
+principali** (`ITO tratta Asciano-Monte Antico.pdf`,
+`Normativa per l'esercizio a Spola.pdf`) e **63 dei 98 file di arricchimento
+"certi"** producono 0 pezzi di testo — sono scansioni immagine, non hanno
+un livello di testo sotto. Risultato: esistono nella cartella e nel
+collegamento (`enrichment_mapping.json`), ma sono **completamente invisibili
+alla ricerca e alle risposte** finché non si aggiunge un passaggio di OCR
+(fattibile con lo stesso approccio Gemini usato per la mappatura, ma è un
+lavoro e un costo separati, da decidere con Iacopo, non implementato oggi).
+
+### 3.9 Limite di 1000 righe per query Supabase, non paginato
+
+`list_indexed_volumes()` e `debug_index_status()` leggevano la tabella
+`documents` con un singolo `.select().execute()`, senza `.range()`. Sotto le
+1000 righe totali (come è stato per mesi, prima del ricaricamento del
+2026-09-03) il bug era invisibile. Con 26.920 righe reali, la libreria
+mostrata nell'app risultava troncata (9 volumi invece di 27) — non un errore
+di visibile, un troncamento silenzioso di Supabase/PostgREST. Corretto lo
+stesso giorno con una lettura paginata (`fetch_all_rows` in `services/rag.py`).
+
 ## 4. Riscrivere da zero o no?
 
 **No.** Non ci sono vincoli architetturali che giustifichino un rewrite: lo stack è corretto per lo scopo, il volume di codice è piccolo (poche centinaia di righe totali), e i problemi individuati sono tutti risolvibili con refactoring mirato, non con una riscrittura. Buttare via il lavoro esistente peggiorerebbe la situazione — perderesti la pipeline RAG già funzionante e testata in produzione (memoria progetto conferma: ricerca semantica operativa, costi tracciati, billing attivo) per ricostruire da capo qualcosa di equivalente.
