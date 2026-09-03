@@ -85,6 +85,23 @@ def embed_texts(texts: List[str]) -> List[List[float]]:
     return llm_provider.embed(texts)
 
 
+PLACEHOLDER_PAGE_MARKERS = [
+    "pagina disponibile per future aggiunte",
+]
+
+
+def is_placeholder_chunk(text: str) -> bool:
+    """Pagine riservate/vuote nei manuali RFI (testo standard, nessun contenuto reale).
+
+    Indicizzarle spreca posti nella ricerca (top_k limitato) su contenuto
+    senza valore — scoperto il 2026-09-03 con una domanda generica ("Cos'e'
+    il BCA?") che ha ricevuto 5 di questi placeholder su 6 risultati,
+    lasciando 0 spazio a contenuto vero. Vedi docs/DECISION_LOG.md.
+    """
+    normalized = " ".join(text.lower().split())
+    return any(marker in normalized for marker in PLACEHOLDER_PAGE_MARKERS)
+
+
 def index_pdf(pdf_path: Path) -> int:
     loader = PyPDFLoader(str(pdf_path))
     pages  = loader.load()
@@ -97,10 +114,13 @@ def index_pdf(pdf_path: Path) -> int:
         chunk_overlap=120,
         separators=["\n\n", "\n", ".", " ", ""],
     )
-    chunks = splitter.split_documents(pages)
+    chunks = [c for c in splitter.split_documents(pages) if not is_placeholder_chunk(c.page_content)]
 
     supabase = get_supabase()
     supabase.table("documents").delete().eq("filename", pdf_path.name).execute()
+
+    if not chunks:
+        return 0
 
     texts      = [c.page_content for c in chunks]
     embeddings = embed_texts(texts)
