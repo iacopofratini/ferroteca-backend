@@ -19,8 +19,32 @@ ENRICHMENT_MAP_PATH = Path("docs/enrichment_mapping.json")
 
 
 def main_text_filenames() -> set:
-    """Nomi file (con .pdf) dei 29 testi principali, primo livello di PDF_DIR."""
+    """Nomi file (con .pdf) dei 29 testi principali, primo livello di PDF_DIR.
+
+    Attenzione: legge il disco locale. In produzione (Render) `data/pdfs/`
+    riparte vuota a ogni deploy (AUDIT.md 3.6) — questa funzione restituisce
+    un insieme vuoto li'. Non usarla per decidere cosa mostrare/recuperare
+    a runtime: usare invece `enrichment_filenames()` (basata su
+    enrichment_mapping.json, presente anche in produzione) in negativo.
+    Resta utile solo in locale, per l'indicizzazione.
+    """
     return {p.name for p in PDF_DIR.glob("*.pdf")}
+
+
+def enrichment_filenames() -> set:
+    """Nomi file (senza sottocartella) di tutti gli arricchimenti "certi" mappati.
+
+    Basata su docs/enrichment_mapping.json, che e' nel repository e quindi
+    presente anche nel container Render — a differenza di main_text_filenames(),
+    funziona correttamente anche in produzione.
+    """
+    if not ENRICHMENT_MAP_PATH.exists():
+        return set()
+    data  = json.loads(ENRICHMENT_MAP_PATH.read_text())
+    names = set()
+    for entry in data.get("mappatura_per_volume", {}).values():
+        names.update(Path(rel).name for rel in entry.get("da_citazione", []))
+    return names
 
 
 def load_enrichment_map() -> Dict[str, List[str]]:
@@ -152,7 +176,8 @@ def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
     # anche gli aggiornamenti/correzioni collegati (solo i collegamenti "certi",
     # confermati da un impatto RFI — vedi docs/DECISION_LOG.md 2026-09-03).
     enrichment_map = load_enrichment_map()
-    main_volumes = {doc.get("volume") for doc in docs if doc.get("filename") in main_text_filenames()}
+    enr_filenames = enrichment_filenames()
+    main_volumes = {doc.get("volume") for doc in docs if doc.get("filename") not in enr_filenames}
 
     enrichment_parts = []
     for volume in main_volumes:
@@ -221,14 +246,15 @@ def list_indexed_volumes() -> List[Dict[str, Any]]:
     ask() quando pertinenti) restano fuori da qui apposta: non sono libri a
     se' stanti, non devono comparire come tali nell'elenco visibile.
     """
-    pdfs    = main_text_filenames()
+    enr_filenames = enrichment_filenames()
+    local_pdfs    = main_text_filenames()  # vuoto in produzione, vedi nota sopra la funzione
     volumes = {}
     for row in fetch_all_rows("filename, volume"):
         fname = row.get("filename", "")
-        if fname and fname in pdfs and fname not in volumes:
+        if fname and fname not in enr_filenames and fname not in volumes:
             volumes[fname] = {"filename": fname, "volume": row.get("volume", fname)}
     for v in volumes.values():
-        v["file_exists"] = v["filename"] in pdfs
+        v["file_exists"] = v["filename"] in local_pdfs
     return list(volumes.values())
 
 
