@@ -304,3 +304,81 @@ in Supabase — la cartella `data/pdfs/` riparte vuota a ogni deploy. Serve
 prima decidere dove vivono i PDF in produzione (candidato: Supabase
 Storage, costo piccolo ma reale, da verificare). Iacopo conferma: priorità
 bassa, dopo aver sistemato le fondamenta di oggi — non implementare ora.
+
+## 2026-09-03 (chiusura sessione) — Bug post-pubblicazione trovati e corretti in giornata
+
+Dopo la pubblicazione dell'arricchimento, Iacopo ha continuato a testare
+l'app dal vivo e ha trovato due problemi reali che non erano emersi nei
+test da terminale.
+
+**Trovato e corretto — libreria vuota in produzione:** subito dopo il push,
+`/api/documents` restituiva `[]` e l'arricchimento in `ask()` non scattava
+mai. Causa: `main_text_filenames()`/`enrichment` in `list_indexed_volumes()`
+e `ask()` decidevano "quali file sono testi principali" leggendo
+`data/pdfs/` dal disco — cartella sempre vuota in produzione (vedi AUDIT.md
+3.6), quindi il filtro escludeva tutto, non solo l'arricchimento. Corretto
+con `enrichment_filenames()` (basata su `enrichment_mapping.json`, nel
+repository, presente anche a runtime su Render) usata in negativo, invece
+di una lista di "main text" letta dal disco in positivo. Verificato in
+locale simulando un disco vuoto, poi confermato live su Render:
+`/api/documents` torna a mostrare 27/27 volumi. **Nota per il futuro**: in
+questo progetto, qualunque funzione chiamata *a runtime in produzione* non
+può assumere che i PDF fisici esistano sul disco del server — solo
+`docs/` (nel repository) e Supabase sono affidabili lì.
+
+**Trovato e corretto — pagine placeholder inquinavano la ricerca:** la
+domanda "Cos'è il BCA?" ha restituito "Non presente nei manuali caricati."
+nonostante l'app avesse indicizzato l'intero volume BCA. Causa: 5 dei 6
+risultati più simili erano pagine riservate vuote ("pagina disponibile per
+future aggiunte", 65 su 26.920 pezzi, 0,2% del totale) — testo abbastanza
+"generico" da risultare matematicamente simile a domande brevi e generiche,
+rubando posto a contenuto vero nella ricerca (limitata ai 6 risultati
+migliori). Verificato leggendo il testo intero di tutti e 65 (non solo
+un'anteprima) prima di cancellarli: nessuno conteneva informazioni uniche
+(solo intestazioni di sezione ripetute altrove + la dicitura standard).
+Corretto in `index_pdf()` (esclude questi pezzi da ora in poi) e le 65
+righe già presenti cancellate direttamente in produzione (senza dover
+rifare la costosa indicizzazione completa).
+
+**Aperto, non risolto oggi — problema più ampio dello stesso tipo:**
+ripetendo la stessa domanda dopo la pulizia, i risultati erano ancora quasi
+tutti "quasi vuoti" ma di un tipo diverso e più generale (piè di pagina
+"Pag. 8 di 44", rimandi "continua nella pagina seguente", titoli di sezione
+nudi) — categoria più ampia delle sole pagine placeholder, non ancora
+filtrata. **Deciso di NON applicare una soglia di lunghezza minima come
+correzione**: un campione ha mostrato frasi normative vere e brevi
+mescolate a questo "quasi vuoto", quindi una soglia avrebbe cancellato
+contenuto reale. Nello stesso campione è emerso anche un problema diverso e
+più serio, segnato separatamente in AUDIT.md 3.10: testo illeggibile per
+font con codifica non standard in almeno `PGOS-RFI.pdf`, `IEITE.pdf`,
+`ISD.pdf`, `IPC (vers. DE n° 14-2018).pdf` — non risolvibile con una regola
+semplice, rimandato alla prossima sessione.
+
+**Chiarito, non un bug:** Iacopo conferma piano Render gratuito. L'errore
+"Errore di connessione al backend" alla prima domanda dopo inattività è
+quasi certamente il servizio che si "risveglia" — la libreria (lettura
+semplice) risponde comunque, ma la chat fa anche una chiamata esterna a
+Gemini, più esposta a un timeout durante il risveglio. Dettagli in
+AUDIT.md 3.11. Nessuna azione di codice necessaria; da ricontrollare solo
+se l'errore si ripete senza un periodo di inattività prima.
+
+**Stato a fine sessione:** `main` pubblicato e allineato
+(`d146bba`), working tree pulito, nessun commit in sospeso. App live e
+funzionante (27/27 volumi visibili, arricchimento e placeholder-fix
+confermati in produzione).
+
+**Prossima sessione — punti aperti, in ordine di probabile priorità:**
+1. **AUDIT.md 3.10** — misurare l'estensione del testo corrotto (font non
+   standard) in `PGOS-RFI`, `IEITE`, `ISD`, `IPC (vers. DE n° 14-2018)` e
+   decidere come correggerlo. Iacopo ha offerto di valutare un'API più
+   capace di Gemini 2.5 Flash se necessaria per le pagine più compromesse —
+   discuterne prima di scegliere lo strumento.
+2. **AUDIT.md 3.8** — decidere se/quando fare un passaggio OCR sui 2 testi
+   principali e 63 arricchimenti oggi invisibili (scansioni senza testo).
+3. **52 documenti mancanti** (AUDIT.md 3.7) — lacuna aziendale, da
+   recuperare/segnalare quando Iacopo ha modo, non tecnica.
+4. **125 collegamenti arricchimento "da contenuto"** (non confermati da un
+   impatto ufficiale) restano esclusi da `ask()` finché non c'è un
+   controllo a campione — vedi `docs/enrichment_mapping.json`.
+5. **Idea rimandata**: link diretto a pagina PDF — bloccata da dove
+   vivono i PDF in produzione (Supabase Storage candidato), priorità bassa.

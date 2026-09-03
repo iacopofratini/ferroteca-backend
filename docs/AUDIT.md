@@ -95,6 +95,48 @@ mostrata nell'app risultava troncata (9 volumi invece di 27) — non un errore
 di visibile, un troncamento silenzioso di Supabase/PostgREST. Corretto lo
 stesso giorno con una lettura paginata (`fetch_all_rows` in `services/rag.py`).
 
+### 3.10 Testo corrotto in alcuni PDF (font con codifica non standard) — aperto
+
+Scoperto il 2026-09-03 controllando perché "Cos'è il BCA?" non trovava
+risposta: almeno `PGOS-RFI.pdf`, `IEITE.pdf`, `ISD.pdf` e
+`IPC (vers. DE n° 14-2018).pdf` contengono pezzi con testo **illeggibile**
+(es. `Ú Ô × Ù Õ Ü Õ Ô ×`, `W W W`) — non scansioni senza testo (punto 3.8),
+ma testo estratto male da un font con mappatura caratteri non standard.
+
+**Importante, verificato prima di proporre una correzione:** non è un
+problema di lunghezza del chunk — un campione ha mostrato frasi normative
+vere e brevi (es. RID 2025 p.576, RS Ristampa 2026 p.117) mescolate a testo
+corrotto di lunghezza simile. Una soglia minima di caratteri avrebbe
+cancellato contenuto reale senza necessariamente togliere tutto il testo
+corrotto (che può comparire anche in pezzi lunghi, non controllato). **Non
+implementata nessuna correzione oggi** — serve prima misurare quanto è
+esteso il problema per ciascun file (pagina per pagina), probabilmente con
+lo stesso approccio "Gemini legge l'immagine della pagina" già usato per la
+mappatura degli arricchimenti, non con una pulizia di solo testo.
+**Prossimo passo:** quantificare l'estensione per file, poi decidere con
+Iacopo se e come correggere (costo/tempo da stimare — possibile bisogno di
+un modello più capace di Gemini 2.5 Flash per pagine molto compromesse, da
+valutare insieme prima di scegliere).
+
+### 3.11 Piano Render gratuito — "risveglio" del servizio dopo inattività
+
+Confermato da Iacopo (2026-09-03): il servizio è su piano Render gratuito.
+Osservato un errore "Errore di connessione al backend" nel frontend alla
+prima domanda in chat dopo un periodo di inattività, mentre l'elenco
+libreria (`/api/documents`, lettura semplice dal DB) risultava già
+popolato. Ipotesi più probabile, non confermata con certezza (nessun
+accesso ai log del server Render da qui): il piano gratuito "addormenta" il
+servizio dopo inattività: la prima richiesta lo risveglia, ma
+`/api/chat/ask` fa anche una chiamata esterna a Gemini (embedding +
+generazione) — più esposta a un timeout del proxy rispetto a una semplice
+lettura dal database durante il risveglio. Il frontend mostra lo stesso
+messaggio generico per qualunque tipo di errore (`catch` unico in
+`sendMessage()`), quindi da qui non si distingue con certezza un timeout di
+risveglio da un altro tipo di errore di rete. Non richiede una correzione
+di codice: è un limite noto del piano gratuito, non un bug. Se il problema
+si ripete anche **non** subito dopo un'inattività prolungata, va trattato
+come anomalia vera, non più come questa ipotesi.
+
 ## 4. Riscrivere da zero o no?
 
 **No.** Non ci sono vincoli architetturali che giustifichino un rewrite: lo stack è corretto per lo scopo, il volume di codice è piccolo (poche centinaia di righe totali), e i problemi individuati sono tutti risolvibili con refactoring mirato, non con una riscrittura. Buttare via il lavoro esistente peggiorerebbe la situazione — perderesti la pipeline RAG già funzionante e testata in produzione (memoria progetto conferma: ricerca semantica operativa, costi tracciati, billing attivo) per ricostruire da capo qualcosa di equivalente.
