@@ -197,3 +197,49 @@ vedi nota separata: la distinzione tra i due livelli è già un campo
 `category` in `sync_documents.py`, ma nessun codice usa ancora quel campo per
 trattare l'arricchimento come integrazione al testo principale invece che
 come fonte a sé stante — da progettare).
+
+**Confermato (2026-09-03):** Render ha ridistribuito, app funzionante
+(libreria vuota come atteso, tabella `documents` svuotata il 2026-09-01).
+
+## 2026-09-03 — Mappatura arricchimento → testi principali
+
+**Deciso:** quando l'app risponde a una domanda su un testo principale che
+ha arricchimenti collegati (Note/DE/PE/DGI che lo modificano o integrano),
+deve recuperare anche le informazioni di quei file, non solo il testo
+principale.
+**Perché:** richiesta esplicita di Iacopo — l'arricchimento esiste apposta
+per correggere/aggiornare il testo principale; ignorarlo darebbe risposte
+corrette solo alla data del testo principale, non allo stato normativo reale.
+
+**Deciso:** capire quale file di arricchimento si collega a quale testo
+principale con uno script + Gemini 2.5 Flash (non con `llm_provider.py`:
+è un lavoro una tantum e usa a mano l'SDK Gemini via script separato, non il
+motore live dell'app — non crea nessun legame in più con Gemini rispetto a
+quello già deciso come provvisorio, vedi `docs/DECISIONS.md`).
+**Perché:** i 30 file "impatto" nella cartella `IMPATTI` sono indici
+ufficiali RFI che dicono "le modifiche a questo volume sono nel documento X"
+ma non contengono la modifica stessa (osservazione di Iacopo, che conosce il
+dominio); più affidabile leggerli e seguire i riferimenti che indovinare dal
+contenuto sparso dei restanti file. Costo trascurabile (budget approvato:
+sotto 5$).
+**Fatto:** letti i 30 "impatti" (10 citazioni/file in media, 98 file
+locali trovati tra quelli citati); sui 131 file rimasti non citati da
+nessun impatto, classificazione diretta del contenuto con Gemini (125
+collegati, 6 senza collegamento chiaro). Risultato: 253 file di
+arricchimento su 259 (97%) hanno oggi un collegamento candidato a un testo
+principale. Dati completi in `docs/enrichment_mapping.json`, riepilogo
+leggibile in `docs/enrichment_mapping.md`. Spesa reale stimata sotto i 2$
+(inclusi tentativi falliti per un bug del "thinking" nascosto di Gemini 2.5
+Flash che troncava le risposte — risolto disattivandolo con
+`thinking_config=ThinkingConfig(thinking_budget=0)`).
+**Da sapere:** i collegamenti trovati leggendo il contenuto sono suggeriti
+da un modello leggero, non verificati uno per uno da una persona — una
+volta ha restituito un codice testo inesistente ("DET"). Da trattare come
+buona base, non verità assoluta, finché non c'è un controllo a campione.
+Trovati anche 52 documenti citati come contenenti modifiche ma assenti in
+locale (vedi `docs/AUDIT.md` punto 3.7) — lacuna aziendale reale, non
+di questo lavoro.
+**Prossimo passo:** progettare come `services/rag.py` (funzione `ask()`) e
+lo schema Supabase useranno `enrichment_mapping.json` per includere
+l'arricchimento nella risposta — non ancora implementato, da discutere con
+Iacopo prima di toccare il motore live.

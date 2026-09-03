@@ -1,0 +1,1782 @@
+{
+  "generato": "2026-09-03 via script + Gemini 2.5 Flash, vedi docs/DECISION_LOG.md",
+  "mappatura_per_volume": {
+    "BA": {
+      "impatti_file": "BA impatto.pdf",
+      "da_citazione": [
+        "NOTE/Nota_635_2018.pdf"
+      ],
+      "da_contenuto": []
+    },
+    "BCA": {
+      "impatti_file": "BCA SEZ. II (DB BAN) impatto.pdf",
+      "da_citazione": [
+        "NOTE/Nota 42_1987.pdf",
+        "DE/DE 1_2013.pdf",
+        "PE/PE 3381_2014.pdf",
+        "DE/DE 3_2016.pdf"
+      ],
+      "da_contenuto": []
+    },
+    "BRA": {
+      "impatti_file": "BRA Impatto.pdf",
+      "da_citazione": [],
+      "da_contenuto": []
+    },
+    "CTF IFN - edizione 2022": {
+      "impatti_file": "impatti CTF-IFN.pdf",
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "PE/PE n. 1202.pdf",
+          "oggetto": "Prescrizione di esercizio. Procedura di interfaccia. Modifiche al Testo Normativo “Caratteristiche tecnico-funzionali dell'infrastruttura ferroviaria nazionale gestita da RFI – edizione 2022”."
+        },
+        {
+          "file": "NOTE/Nota Dispositiva RFI-VDO.DCO.PC.SC-A0011-P-2023-0000037 del 03.11.2023.pdf",
+          "oggetto": "Chiarimenti sulla funzione di sicurezza di 'dirigenza delle manovre' e le responsabilità associate negli scenari di manovra, incluso il nuovo scenario 5bis."
+        }
+      ]
+    },
+    "DELB AV-AC": {
+      "impatti_file": "DELB AV-AC Impatti.pdf",
+      "da_citazione": [
+        "DE/DE 14_2015.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 19_2013.pdf",
+          "oggetto": "Modifiche all'Istruzione per la protezione dei cantieri"
+        },
+        {
+          "file": "DE/DE 8_2016.pdf",
+          "oggetto": "Istruzioni operative per l'Interfaccia Operatore RBC sulla linea AV/AC Roma-Napoli, gestendo rallentamenti, arresti d'emergenza e PCF/POC in ambiente ERTMS/ETCS L2."
+        },
+        {
+          "file": "DE/DE 3_2012.pdf",
+          "oggetto": "Attivazione all'esercizio e norme particolari per l'esercizio del tratto di linea AV/AC \"Passante AV di Bologna\""
+        },
+        {
+          "file": "PE/PE 3398_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per l'affiancamento tra linee AV/AC e tradizionali nel tratto Rho Fiera - Milano Certosa, con riferimento al RCT."
+        },
+        {
+          "file": "PE/PE 1924_2006.pdf",
+          "oggetto": "Autorizzazione per la circolazione contemporanea di treni con blocco orientato a destra su entrambi i binari della linea AC/AV Torino-Novara, secondo ERTMS/ETCS L2."
+        },
+        {
+          "file": "PE/PE 1737_2006.pdf",
+          "oggetto": "Prescrizione per l'utilizzo di locomotive D 445 modificate, anche in comando multiplo, per il soccorso di complessi ETR 500 su linee AV/AC, definendo procedure operative e limiti di velocità."
+        },
+        {
+          "file": "PE/PE 268_2006.pdf",
+          "oggetto": "Prescrizione sull'immobilizzazione dei deviatoi sulle Linee AC/AV attrezzate con ERTMS/ETCSL2."
+        },
+        {
+          "file": "PE/PE 2066_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per la funzione 'verifica occupazione cdb di linea' dell'ACCM di Bologna sulla linea AV/AC Milano-Firenze, definendo modalità di attivazione/disattivazione e ruoli operativi."
+        },
+        {
+          "file": "PE/PE 3763_2009.pdf",
+          "oggetto": "Prescrizioni operative per gli impianti di trazione elettrica a 25 kV sulla tratta AV/AC Bologna-Firenze, inclusi assetti di alimentazione, sicurezza e manutenzione."
+        },
+        {
+          "file": "PE/PE 1846_2005.pdf",
+          "oggetto": "Prescrizione RFI su limitazioni di velocità (150 km/h) per treni ETR 500 PLT su linea AC/AV Torino-Novara con ERTMS/ETCSL2 a seguito di allarmi RTB (Caldo/Caldissimo)."
+        },
+        {
+          "file": "PE/PE 1110_2013.pdf",
+          "oggetto": "Prescrizione di esercizio per comandi Esclusione di Zona e Arresto di Emergenza nella tratta PM Anzola - PM Reno della linea AV/AC Milano - Firenze."
+        },
+        {
+          "file": "PE/PE 1433_2012.pdf",
+          "oggetto": "Autorizzazione alla circolazione contemporanea a destra su entrambi i binari nel Nodo di Bologna e Passante AV/AC, con condizioni relative a DELB e SCMT."
+        },
+        {
+          "file": "PE/PE 1432_2006.pdf",
+          "oggetto": "Prescrizione per il soccorso di treni su linee AC/AV con mezzi non ERTMS/ETCS L2, definendo procedure per il DCO in PdS telecomandati."
+        },
+        {
+          "file": "PE/PE 1432_2012.pdf",
+          "oggetto": "Integrazione normativa per la gestione degli allarmi RTB su linee AC/AV con ERTMS/ETCS L2, specificando le procedure per il DCO in caso di disconnessione dal RBC."
+        },
+        {
+          "file": "PE/PE 3752_2013.pdf",
+          "oggetto": "Prescrizione operativa RFI sull'uso della 'Liberazione artificiale del percorso dell'itinerario' nei PdS della tratta AV/AC Milano-Firenze, con restrizioni in assenza di treni."
+        },
+        {
+          "file": "PE/PE 1395_2012.pdf",
+          "oggetto": "Prescrizione di esercizio per considerare tratti di linee tradizionali nel nodo di Bologna come affiancati alla linea AV/AC Milano-Bologna-Firenze."
+        },
+        {
+          "file": "PE/PE 2061_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per la circolazione contemporanea di treni a destra sulla linea AV/AC Bologna S.Ruffillo - Firenze Castello con ERTMS/ETCS L2."
+        },
+        {
+          "file": "PE/PE 1014_2016.pdf",
+          "oggetto": "Prescrizione di esercizio e procedura di interfaccia per la linea AV/AC Roma - Napoli"
+        },
+        {
+          "file": "PE/PE 5256_2008.pdf",
+          "oggetto": "Prescrizione per la gestione dei rallentamenti in zona di confine a Bivio/PC Melegnano"
+        },
+        {
+          "file": "PE/PE 1293_2005.pdf",
+          "oggetto": "Prescrizione e istruzioni per l'impiego di apparecchiature di registrazione vocale nel Posto Centrale della linea AC/AV Roma - Napoli"
+        },
+        {
+          "file": "PE/PE 2269_2009.pdf",
+          "oggetto": "Normativa transitoria per provvedimenti cautelativi in caso di forti venti trasversali su linea AV/AC Firenze-Bologna"
+        },
+        {
+          "file": "PE/PE 5163_2008.pdf",
+          "oggetto": "Segnalazione a bordo del messaggio \"Conferma di arresto al segnale\" sulla linea AC/AV Roma - Napoli"
+        },
+        {
+          "file": "PE/PE 3859_2008.pdf",
+          "oggetto": "Istruzioni per l'uso di apparecchiature di registrazione vocale presso il Posto Centrale DCO della linea AV/AC Milano-Bologna per comunicazioni operative e di manutenzione."
+        },
+        {
+          "file": "PE/PE 1776_2013.pdf",
+          "oggetto": "Prescrizione di esercizio per l'estensione delle zone di uscita dei binari di precedenza 16 e 19 della stazione di Bologna AV a 81 metri, basata su analisi di sicurezza."
+        },
+        {
+          "file": "PE/PE 3375_2009.pdf",
+          "oggetto": "Prescrizioni operative per gli impianti di trazione elettrica a 25 kV sulla sub-tratta AV/AC Novara-Milano, con dettagli su alimentazione e sicurezza."
+        },
+        {
+          "file": "PE/PE 5211_2008.pdf",
+          "oggetto": "Circolazione treni ML e carrelli su linea AV/AC Milano-Bologna con ERTMS/ETCS L2: inibizione attivazione lettera \"V\" lampeggiante"
+        },
+        {
+          "file": "PE/PE 2068_2009.pdf",
+          "oggetto": "Prescrizione di esercizio. Estensione di prescrizioni per linea AV/AC Milano-Bologna a Bologna-Firenze"
+        },
+        {
+          "file": "PE/PE 3680_2009.pdf",
+          "oggetto": "Prescrizione di esercizio che consente di considerare la linea tradizionale Gricignano-Napoli via Aversa affiancata alla linea AV/AC 1° Bivio/P.C. Gricignano-Napoli per la circolazione dei treni."
+        },
+        {
+          "file": "PE/PE 4233_2007.pdf",
+          "oggetto": "Prescrizione per l'interconnessione di Caserta sulla linea AC/AV Roma-Napoli"
+        },
+        {
+          "file": "PE/PE 3379_2009.pdf",
+          "oggetto": "Integrazioni alla normativa per l'esercizio degli impianti RTB sulle linee AC/AV con ERTMS/ETCS L2, includendo la rilevazione di assi frenati."
+        },
+        {
+          "file": "PE/PE 1855_2005.pdf",
+          "oggetto": "Prescrizioni e istruzioni particolari per l'esercizio degli impianti di trazione elettrica a 25 kV sulla sub-tratta AV/AC Torino-Novara."
+        },
+        {
+          "file": "PE/PE 2024_2005.pdf",
+          "oggetto": "Prescrizione concernente \"Linea AC/AV Roma - Napoli circolazione treni in stato di \"ISOLATO\"."
+        },
+        {
+          "file": "PE/PE 5119_2008.pdf",
+          "oggetto": "Prescrizione sulla limitazione di velocità per il primo treno circolante sulle linee AV/AC dopo l'intervallo notturno, abrogando una precedente disposizione."
+        },
+        {
+          "file": "DGI/DGI 16_2009.pdf",
+          "oggetto": "Attivazione dell'esercizio commerciale sulla linea AV/AC Novara-Milano con sistema ERTMS/ETCS L2, implementando norme ANSF e disposizioni specifiche per RTB."
+        },
+        {
+          "file": "DGI/DGI 51_2005.pdf",
+          "oggetto": "Definisce le normative per l'esercizio degli impianti di rilevamento temperatura boccole (RTB) sulle linee Alta Capacità/Alta Velocità (AC/AV) con ERTMS/ETCS L2."
+        },
+        {
+          "file": "DGI/DGI 11_2009.pdf",
+          "oggetto": "Disposizioni di Esercizio per l'attivazione del pre-esercizio sulla linea Bologna - Firenze"
+        },
+        {
+          "file": "DGI/DGI 45_2006.pdf",
+          "oggetto": "Modifica le norme per l'esercizio degli impianti RTB su linee AV/AC con ERTMS/ETCS L2, specificando la gestione degli allarmi impropri."
+        }
+      ]
+    },
+    "ICMO": {
+      "impatti_file": "ICMO impatto.pdf",
+      "da_citazione": [
+        "NOTE/Nota 223_2018.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 01-2023.pdf",
+          "oggetto": "Disposizione di esercizio n. 1 del 31/3/2023: Allineamento e modifiche normative"
+        },
+        {
+          "file": "DGI/DGI 27-2004 ristampa 2024.pdf",
+          "oggetto": "Disposizione RFI che definisce le procedure per la gestione delle interruzioni sulle linee ferroviarie telecomandate e a dirigenza locale, inclusa la circolazione dei mezzi d'opera."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-SVS.NCR-A0011-P-2023-0000938.pdf",
+          "oggetto": "Chiarimenti normativi su Sistema Centrale di Registrazione, interruzione binari, linee SCC/CTC, guasti post-interruzione e coordinamento manovre MdO."
+        }
+      ]
+    },
+    "IEITE": {
+      "impatti_file": "IEITE Impatti.pdf",
+      "da_citazione": [
+        "NOTE/Nota 400_2008.pdf",
+        "NOTE/Nota 2014_2018.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE_16_2022.pdf",
+          "oggetto": "Procedura di interfaccia. Upgrading tecnologico a standard AV/AC della tratta PM Rovezzano - 1º Bivio Orvieto Sud della linea Roma - Firenze (DD): estensione norme e particolarità tecnico-normative"
+        },
+        {
+          "file": "PE/PE 3763_2009.pdf",
+          "oggetto": "Prescrizioni operative per gli impianti di trazione elettrica a 25 kV sulla tratta AV/AC Bologna-Firenze, inclusi assetti di alimentazione, sicurezza e manutenzione."
+        },
+        {
+          "file": "PE/PE 4543_2008.pdf",
+          "oggetto": "Prescrizione: Apparati Centrali Computerizzati dei Posti di Servizio PJ2 della linea AV/AC Milano – Bologna."
+        },
+        {
+          "file": "PE/PE 3375_2009.pdf",
+          "oggetto": "Prescrizioni operative per gli impianti di trazione elettrica a 25 kV sulla sub-tratta AV/AC Novara-Milano, con dettagli su alimentazione e sicurezza."
+        },
+        {
+          "file": "PE/PE 1855_2005.pdf",
+          "oggetto": "Prescrizioni e istruzioni particolari per l'esercizio degli impianti di trazione elettrica a 25 kV sulla sub-tratta AV/AC Torino-Novara."
+        },
+        {
+          "file": "NOTE/Nota RFI-DTC-NCR 2022_07_04 1184.pdf",
+          "oggetto": "Esiti riunioni di coordinamento funzionale su invio mezzi soccorso, omissione segnali pantografi e FL"
+        }
+      ]
+    },
+    "IESCMT": {
+      "impatti_file": "IESCMT impatto.pdf",
+      "da_citazione": [
+        "DGI/DGI 4_2009.pdf",
+        "DGI/DGI 2_2009.pdf",
+        "DE/DE 26_2013.pdf",
+        "DE/DE 1_2013.pdf",
+        "DE/DE 1_2014.pdf",
+        "DE/DE 8_2014.pdf",
+        "PE/PE 1517_2015.pdf",
+        "DE/DE 24_2015.pdf",
+        "PE/PE 1572_2017.pdf",
+        "PE/PE 2488_2017.pdf",
+        "DE/DE 5_2018.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 16_2018.pdf",
+          "oggetto": "Modifiche alle NELAV (Norme per l'esercizio delle linee AV/AC con ERTMS/ETCS L2) riguardanti la gestione della connessione radio e l'interfaccia con l'agente di condotta."
+        },
+        {
+          "file": "PE/PE 1433_2012.pdf",
+          "oggetto": "Autorizzazione alla circolazione contemporanea a destra su entrambi i binari nel Nodo di Bologna e Passante AV/AC, con condizioni relative a DELB e SCMT."
+        },
+        {
+          "file": "PE/PE 3859_2008.pdf",
+          "oggetto": "Istruzioni per l'uso di apparecchiature di registrazione vocale presso il Posto Centrale DCO della linea AV/AC Milano-Bologna per comunicazioni operative e di manutenzione."
+        },
+        {
+          "file": "PE/PE 3645_2007.pdf",
+          "oggetto": "Prescrizione con norme integrative per l'impiego dei sistemi di bordo SSB ETCS/SCMT Alstom ed Ansaldo, focalizzata su inserzione dati, transizioni e operazioni su linee AC/AV per il Personale di Condotta."
+        },
+        {
+          "file": "PE/PE 2063_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per circolazione treni a destra nel tratto Bologna Centrale - Bologna S.Ruffillo"
+        }
+      ]
+    },
+    "IESSC": {
+      "impatti_file": "IESSC impatto.pdf",
+      "da_citazione": [
+        "DGI/DGI 4_2009.pdf",
+        "DE/DE 26_2013.pdf",
+        "DE/DE 1_2013.pdf",
+        "PE/PE 3872_2013.pdf",
+        "PE/PE 763_2014.pdf",
+        "DE/DE 1_2014.pdf",
+        "DE/DE 8_2014.pdf",
+        "PE/PE 1517_2015.pdf",
+        "DE/DE 24_2015.pdf",
+        "PE/PE 2488_2017.pdf",
+        "DE/DE 5_2018.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "PE/PE 3398_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per l'affiancamento tra linee AV/AC e tradizionali nel tratto Rho Fiera - Milano Certosa, con riferimento al RCT."
+        },
+        {
+          "file": "PE/PE 2170_2015.pdf",
+          "oggetto": "Prescrizione di esercizio per la circolazione dei treni in modalità Staff Responsible a Bologna Centrale AV, con istruzioni su itinerari e sicurezza."
+        },
+        {
+          "file": "DGI/DGI 26_2008.pdf",
+          "oggetto": "Istruzioni per l'esercizio del Sistema Comando e Controllo (SCC/M) su linea AV/AC Milano-Bologna con ERTMS/ETCS L2, inclusi messaggistica e successione treni."
+        }
+      ]
+    },
+    "IRTB": {
+      "impatti_file": "IRTB Impatti.pdf",
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 17_2018.pdf",
+          "oggetto": "Disposizione di esercizio n. 17 del 12/10/2018: Procedura di interfaccia per allarme RTB/RTF"
+        },
+        {
+          "file": "DE/DE 6_2017.pdf",
+          "oggetto": "Riordino e aggiornamento delle norme di esercizio per linee AV/AC con ERTMS/ETCS L2 senza segnali fissi e per l'istruzione del blocco radio sulla IFN."
+        },
+        {
+          "file": "PE/PE 5212_2008.pdf",
+          "oggetto": "Prescrizione per limitazione di velocità a 150 km/h per treni ETR su linea AV/AC Milano-Bologna con ERTMS/ETCS L2 a seguito di allarme RTB."
+        },
+        {
+          "file": "PE/PE 1846_2005.pdf",
+          "oggetto": "Prescrizione RFI su limitazioni di velocità (150 km/h) per treni ETR 500 PLT su linea AC/AV Torino-Novara con ERTMS/ETCSL2 a seguito di allarmi RTB (Caldo/Caldissimo)."
+        },
+        {
+          "file": "PE/PE 1432_2012.pdf",
+          "oggetto": "Integrazione normativa per la gestione degli allarmi RTB su linee AC/AV con ERTMS/ETCS L2, specificando le procedure per il DCO in caso di disconnessione dal RBC."
+        },
+        {
+          "file": "PE/PE n. 1525 del 26.7.2024.pdf",
+          "oggetto": "Prescrizione di esercizio. Gestione del transitorio in deroga all'art. 2, comma 7, delle nuove Istruzioni per l'esercizio degli impianti di rilevamento temperatura boccole e assi frenati"
+        },
+        {
+          "file": "PE/PE 1296_2005.pdf",
+          "oggetto": "Prescrizione RFI del 2005 su procedure operative e limitazioni di velocità per treni ETR 500 PLT su linee AC/AV con ERTMS/ETCSL2 a seguito di allarmi RTB."
+        },
+        {
+          "file": "PE/PE 1571_2017.pdf",
+          "oggetto": "Prescrizione di esercizio. Valori delle soglie di taratura degli allarmi RTB/RTF per il veicolo ETR1000"
+        },
+        {
+          "file": "PE/PE 1834_2014.pdf",
+          "oggetto": "Prescrizione di esercizio che integra la normativa RTB, consentendo il collegamento degli allarmi ai segnali di Posti di Blocco Intermedi (PBA) e definendo le relative procedure di circolazione e le caratteristiche dei segnali."
+        },
+        {
+          "file": "PE/PE 3379_2009.pdf",
+          "oggetto": "Integrazioni alla normativa per l'esercizio degli impianti RTB sulle linee AC/AV con ERTMS/ETCS L2, includendo la rilevazione di assi frenati."
+        },
+        {
+          "file": "DGI/DGI 16_2009.pdf",
+          "oggetto": "Attivazione dell'esercizio commerciale sulla linea AV/AC Novara-Milano con sistema ERTMS/ETCS L2, implementando norme ANSF e disposizioni specifiche per RTB."
+        },
+        {
+          "file": "DGI/DGI 46_2006.pdf",
+          "oggetto": "Modifiche alle Disposizioni per l'esercizio in telecomando e altre istruzioni ferroviarie"
+        },
+        {
+          "file": "DGI/DGI 29_2008.pdf",
+          "oggetto": "Norme particolari per l'esercizio degli impianti di rilevamento temperatura boccole (RTB) sulla linea AV/AC Milano - Bologna"
+        },
+        {
+          "file": "DGI/DGI 51_2005.pdf",
+          "oggetto": "Definisce le normative per l'esercizio degli impianti di rilevamento temperatura boccole (RTB) sulle linee Alta Capacità/Alta Velocità (AC/AV) con ERTMS/ETCS L2."
+        },
+        {
+          "file": "DGI/DGI 69_2005.pdf",
+          "oggetto": "Norme particolari per l'esercizio degli impianti di rilevamento temperatura boccole (RTB) sulla linea AC/AV Torino - Novara"
+        },
+        {
+          "file": "DGI/DGI 11_2009.pdf",
+          "oggetto": "Disposizioni di Esercizio per l'attivazione del pre-esercizio sulla linea Bologna - Firenze"
+        },
+        {
+          "file": "DGI/DGI 45_2006.pdf",
+          "oggetto": "Modifica le norme per l'esercizio degli impianti RTB su linee AV/AC con ERTMS/ETCS L2, specificando la gestione degli allarmi impropri."
+        }
+      ]
+    },
+    "ISD": {
+      "impatti_file": "ISD Impatti.pdf",
+      "da_citazione": [
+        "NOTE/Nota 12_1976.pdf",
+        "PE/PE 358_2007.pdf",
+        "NOTE/Nota 3366_2007.pdf",
+        "PE/PE 474_2011.pdf",
+        "DE/DE 17_2013.pdf",
+        "DE/DE 5_2014+DPR 3127_2014.pdf",
+        "PE/PE 2220_2014.pdf",
+        "PE/PE 1794_2015.pdf",
+        "NOTE/Nota 20_2018.pdf",
+        "PE/PE 3514_2017.pdf",
+        "NOTE/Nota_1192_2018.pdf",
+        "PE/PE 2150-2020.pdf",
+        "PE/PE 2100_2020.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 21_2013.pdf",
+          "oggetto": "Modifiche a Istruzioni di servizio, Disposizioni e Prescrizioni di esercizio"
+        },
+        {
+          "file": "DE/DE 31_2005.pdf",
+          "oggetto": "Disposizioni tecniche e normative per l'esercizio del Sistema Comando e Controllo (SCC) - Linee ad Alta Capacità/Alta Velocità (AC/AV) – ETCS L 2 senza segnali fissi luminosi"
+        },
+        {
+          "file": "DE/DE_16_2022.pdf",
+          "oggetto": "Procedura di interfaccia. Upgrading tecnologico a standard AV/AC della tratta PM Rovezzano - 1º Bivio Orvieto Sud della linea Roma - Firenze (DD): estensione norme e particolarità tecnico-normative"
+        },
+        {
+          "file": "DE/DE 01-2023.pdf",
+          "oggetto": "Disposizione di esercizio n. 1 del 31/3/2023: Allineamento e modifiche normative"
+        },
+        {
+          "file": "DE/DE 29-2021.pdf",
+          "oggetto": "Trasmissione e dettaglio delle modifiche alle Istruzioni per l'esercizio con sistemi di blocco elettrico (IESBE Parti III e V) e alle istruzioni per l'esercizio con sistemi ETCS/ERTMS L2."
+        },
+        {
+          "file": "PE/PE 2150_2020.pdf",
+          "oggetto": "Prescrizione di esercizio per la segnalazione di coda dei treni merci"
+        },
+        {
+          "file": "PE/PE 268_2006.pdf",
+          "oggetto": "Prescrizione sull'immobilizzazione dei deviatoi sulle Linee AC/AV attrezzate con ERTMS/ETCSL2."
+        },
+        {
+          "file": "PE/PE 4543_2008.pdf",
+          "oggetto": "Prescrizione: Apparati Centrali Computerizzati dei Posti di Servizio PJ2 della linea AV/AC Milano – Bologna."
+        },
+        {
+          "file": "PE/PE 1432_2006.pdf",
+          "oggetto": "Prescrizione per il soccorso di treni su linee AC/AV con mezzi non ERTMS/ETCS L2, definendo procedure per il DCO in PdS telecomandati."
+        },
+        {
+          "file": "PE/PE 371_2006.pdf",
+          "oggetto": "Prescrizione: Linee AC/AV - Soccorso ai treni con mezzi di trazione non attrezzati con ERTMS/ETCS L2"
+        },
+        {
+          "file": "PE/PE 2169_2015.pdf",
+          "oggetto": "Prescrizione di esercizio per movimenti contemporanei e zona di uscita nella stazione di Bologna Centrale AV"
+        },
+        {
+          "file": "PE/PE 5210_2008.pdf",
+          "oggetto": "Prescrizione. Particolarità d'impianto della sub tratta di linea AC/AV Milano - Bologna."
+        },
+        {
+          "file": "PE/PE 3308_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per la circolazione di convogli diagnostici non ERTMS/ETCS su linea AV/AC Roma - Napoli"
+        },
+        {
+          "file": "PE/PE 172_2007.pdf",
+          "oggetto": "Prescrizione: Linea AC/AV Torino - Novara attrezzata con ERTMS/ETCS Livello 2 - Circolazione convogli diagnostici non muniti di apparecchiature ERTMS/ETCS di bordo."
+        },
+        {
+          "file": "PE/PE 1516_2012.pdf",
+          "oggetto": "Prescrizione di esercizio per la modifica di itinerari di treni tra linee AV/AC e tradizionali."
+        },
+        {
+          "file": "DGI/DGI 31_2005.pdf",
+          "oggetto": "Disposizioni tecniche e normative per l'esercizio del Sistema Comando e Controllo (SCC)"
+        },
+        {
+          "file": "DGI/DGI 27_2006.pdf",
+          "oggetto": "Stabilisce le norme di esercizio per l'uso della telefonia mobile GSM-R (terra-treno, bordo-bordo, terra-terra), modificando istruzioni esistenti e aggiornando i Fascicoli Linea."
+        },
+        {
+          "file": "DGI/DGI 10_2009.pdf",
+          "oggetto": "Disposizioni di Esercizio per l'attivazione del pre-esercizio sulla linea Bologna - Firenze"
+        },
+        {
+          "file": "DGI/DGI 14_2009.pdf",
+          "oggetto": "Disposizione di esercizio n. 14 del 28/10/2009 - Attivazione pre-esercizio AV/AC Novara-Milano"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-VDO.DTC-A0011-P-2024-0001284.pdf",
+          "oggetto": "Chiarimenti normativi su manovra deviatoi, interruzione binari con veicoli in sosta, cessione titolarità interruzioni e stazionamento veicoli in impianti non presenziati."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-VDO.DTC-A0011-P-2024-0001284 del 26.6.2024.pdf",
+          "oggetto": "Chiarimenti normativi su manovra deviatoi, interruzione binari con veicoli in sosta, cessione titolarità interruzioni e stazionamento veicoli in impianti non presenziati."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI_137_17_3_15 e RFI_1081_13_2_15 E RFI 1691_15_3_2018.pdf",
+          "oggetto": "Dispositivo di immobilizzazione per gli apparecchi di binario (art. 8 ISD)"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI_1687_20_06_2017.pdf",
+          "oggetto": "Chiarimento normativo sull'art. 15, comma 4 dell'ISD relativo agli 'altri agenti dipendenti' per l'accertamento della completezza dei treni."
+        }
+      ]
+    },
+    "ISM": {
+      "impatti_file": "ISM Impatti.pdf",
+      "da_citazione": [
+        "RFI-FILE NORMATIVI MISTI/31_2002.pdf",
+        "NOTE/Nota 8493_2013.pdf",
+        "NOTE/Nota 6704_2015.pdf",
+        "NOTE/Nota_1192_2018.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 8_2013.pdf",
+          "oggetto": "Istruzione per la Circolazione dei Mezzi d'Opera"
+        },
+        {
+          "file": "DE/DE 12_2021.pdf",
+          "oggetto": "Aggiornamento del testo normativo \"Estratto delle norme del RID\" per il trasporto ferroviario di merci pericolose, allineato all'edizione 2021 del RID."
+        },
+        {
+          "file": "PE/PE 1557_2005.pdf",
+          "oggetto": "Istruzioni per l'impiego delle apparecchiature di registrazione vocale presso il Posto Centrale del Sistema Comando e Controllo AC/AV della linea Torino Novara, postazione DCO."
+        },
+        {
+          "file": "NOTE/Nota Dispositiva RFI-VDO.DCO-A0011-P-2023-0000325 del 15.11.2023.pdf",
+          "oggetto": "Chiarimenti sulle procedure e formule di comunicazione registrata per le manovre nello scenario 5bis ISM."
+        },
+        {
+          "file": "NOTE/Nota Dispositiva RFI-VDO.DCO.PC.SC-A0011-P-2023-0000037 del 03.11.2023.pdf",
+          "oggetto": "Chiarimenti sulla funzione di sicurezza di 'dirigenza delle manovre' e le responsabilità associate negli scenari di manovra, incluso il nuovo scenario 5bis."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-SVS.NCR.A0011.P.2023.0000938.pdf",
+          "oggetto": "Esiti delle riunioni di coordinamento funzionale – documento n. 1/2023"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-VDO.DTC-A0011-P-2024-0001284.pdf",
+          "oggetto": "Chiarimenti normativi su manovra deviatoi, interruzione binari con veicoli in sosta, cessione titolarità interruzioni e stazionamento veicoli in impianti non presenziati."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-VDO.DTC-A0011-P-2024-0001284 del 26.6.2024.pdf",
+          "oggetto": "Chiarimenti normativi su manovra deviatoi, interruzione binari con veicoli in sosta, cessione titolarità interruzioni e stazionamento veicoli in impianti non presenziati."
+        }
+      ]
+    },
+    "ISV": {
+      "impatti_file": "ISV impatto.pdf",
+      "da_citazione": [],
+      "da_contenuto": []
+    },
+    "ITLC ristampa 2022": {
+      "impatti_file": "ITLC impatto.pdf",
+      "da_citazione": [
+        "NOTE/Nota 12_1990.pdf",
+        "NOTE/Nota 39_1998.pdf",
+        "PE/PE 358_2007.pdf",
+        "DGI/DGI 46_2007.pdf",
+        "DE/DE 1_2014.pdf",
+        "PE/PE 2220_2014.pdf",
+        "NOTE/Nota 6008_2017.pdf",
+        "NOTE/Nota 2745_2017.pdf",
+        "PE/PE 1252_2018.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 21_2013.pdf",
+          "oggetto": "Modifiche a Istruzioni di servizio, Disposizioni e Prescrizioni di esercizio"
+        },
+        {
+          "file": "DE/DE 5_2014 + DPR 3127_2014.pdf",
+          "oggetto": "Disposizione di Esercizio n. 5 del 9/4/2014 riguardante il passaggio ora solare/ora legale e viceversa."
+        },
+        {
+          "file": "PE/PE 1293_2005.pdf",
+          "oggetto": "Prescrizione e istruzioni per l'impiego di apparecchiature di registrazione vocale nel Posto Centrale della linea AC/AV Roma - Napoli"
+        },
+        {
+          "file": "PE/PE 1647_2005.pdf",
+          "oggetto": "Prescrizione: Immissione dati/inizio missione in finestra TAF sulla linea AC/AV Roma-Napoli."
+        },
+        {
+          "file": "PE/PE 1186_2010.pdf",
+          "oggetto": "Prescrizione di esercizio: utilizzo delle apparecchiature di registrazione vocale"
+        },
+        {
+          "file": "PE/PE 3301_2013.pdf",
+          "oggetto": "Prescrizione di esercizio per la stazione di Arezzo"
+        },
+        {
+          "file": "DGI/DGI 46_2006.pdf",
+          "oggetto": "Modifiche alle Disposizioni per l'esercizio in telecomando e altre istruzioni ferroviarie"
+        },
+        {
+          "file": "DGI/DGI 27_2006.pdf",
+          "oggetto": "Stabilisce le norme di esercizio per l'uso della telefonia mobile GSM-R (terra-treno, bordo-bordo, terra-terra), modificando istruzioni esistenti e aggiornando i Fascicoli Linea."
+        },
+        {
+          "file": "DGI/DGI 27_2004.pdf",
+          "oggetto": "Disposizione RFI che unifica le norme per le interruzioni sulle linee telecomandate e a dirigenza locale, inclusi PdS e procedure durante i periodi di sospensione."
+        }
+      ]
+    },
+    "NELAV 2024": {
+      "impatti_file": "NELAV 2024 impatti.pdf",
+      "da_citazione": [
+        "NOTE/Nota 2554_2018.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 20_2016.pdf",
+          "oggetto": "Disposizione di esercizio per l'attivazione della tratta Bivio Casirate - Bivio/PC Roncadelle della linea AV/AC Milano - Brescia"
+        },
+        {
+          "file": "DE/DE 21_2016.pdf",
+          "oggetto": "Istruzione per la gestione dell'Interfaccia Operatore RBC - Linee AV/AC Milano - Bologna e Milano - Brescia"
+        },
+        {
+          "file": "DE/DE 16_2018.pdf",
+          "oggetto": "Modifiche alle NELAV (Norme per l'esercizio delle linee AV/AC con ERTMS/ETCS L2) riguardanti la gestione della connessione radio e l'interfaccia con l'agente di condotta."
+        },
+        {
+          "file": "DE/DE 17_2018.pdf",
+          "oggetto": "Disposizione di esercizio n. 17 del 12/10/2018: Procedura di interfaccia per allarme RTB/RTF"
+        },
+        {
+          "file": "DE/DE 6_2017.pdf",
+          "oggetto": "Riordino e aggiornamento delle norme di esercizio per linee AV/AC con ERTMS/ETCS L2 senza segnali fissi e per l'istruzione del blocco radio sulla IFN."
+        },
+        {
+          "file": "DE/DE 4_2020.pdf",
+          "oggetto": "Modifiche alle Istruzioni per l'esercizio delle linee ERTMS/ETCS L2 senza segnali fissi luminosi, in particolare per la gestione dell'indisponibilità dei Posti di Esodo."
+        },
+        {
+          "file": "PE/PE 5213_2008.pdf",
+          "oggetto": "Modifica le norme di circolazione per carrelli e treni materiali su linee AV/AC con ERTMS/ETCS L2, limitando la velocità massima a 60 Km/h."
+        },
+        {
+          "file": "PE/PE 2066_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per la funzione 'verifica occupazione cdb di linea' dell'ACCM di Bologna sulla linea AV/AC Milano-Firenze, definendo modalità di attivazione/disattivazione e ruoli operativi."
+        },
+        {
+          "file": "PE/PE 2170_2015.pdf",
+          "oggetto": "Prescrizione di esercizio per la circolazione dei treni in modalità Staff Responsible a Bologna Centrale AV, con istruzioni su itinerari e sicurezza."
+        },
+        {
+          "file": "PE/PE 1296_2005.pdf",
+          "oggetto": "Prescrizione RFI del 2005 su procedure operative e limitazioni di velocità per treni ETR 500 PLT su linee AC/AV con ERTMS/ETCSL2 a seguito di allarmi RTB."
+        },
+        {
+          "file": "PE/PE 2061_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per la circolazione contemporanea di treni a destra sulla linea AV/AC Bologna S.Ruffillo - Firenze Castello con ERTMS/ETCS L2."
+        },
+        {
+          "file": "PE/PE 1776_2013.pdf",
+          "oggetto": "Prescrizione di esercizio per l'estensione delle zone di uscita dei binari di precedenza 16 e 19 della stazione di Bologna AV a 81 metri, basata su analisi di sicurezza."
+        },
+        {
+          "file": "PE/PE 5119_2008.pdf",
+          "oggetto": "Prescrizione sulla limitazione di velocità per il primo treno circolante sulle linee AV/AC dopo l'intervallo notturno, abrogando una precedente disposizione."
+        },
+        {
+          "file": "DGI/DGI 17_2009.pdf",
+          "oggetto": "Annuncio dell'entrata in vigore del Decreto 13/2009 dell'ANSF, che modifica le norme di esercizio per le linee AV/AC con ERTMS/ETCS L2, dal 2 dicembre 2009."
+        },
+        {
+          "file": "DGI/DGI 20_2009.pdf",
+          "oggetto": "Attivazione all'esercizio commerciale della linea AV/AC Bologna – Firenze e estensione delle norme di esercizio, incluse quelle relative a ERTMS/ETCS L2 e ACCM."
+        },
+        {
+          "file": "DGI/DGI 13_2009.pdf",
+          "oggetto": "Norme sperimentali per la circolazione dei treni sulla linea AV/AC Milano – Bologna con SSB isolato"
+        }
+      ]
+    },
+    "NETE 2023": {
+      "impatti_file": "NETE impatto.pdf",
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 21_2016.pdf",
+          "oggetto": "Istruzione per la gestione dell'Interfaccia Operatore RBC - Linee AV/AC Milano - Bologna e Milano - Brescia"
+        },
+        {
+          "file": "DE/DE 8_2016.pdf",
+          "oggetto": "Istruzioni operative per l'Interfaccia Operatore RBC sulla linea AV/AC Roma-Napoli, gestendo rallentamenti, arresti d'emergenza e PCF/POC in ambiente ERTMS/ETCS L2."
+        },
+        {
+          "file": "DE/DE 17_2018.pdf",
+          "oggetto": "Disposizione di esercizio n. 17 del 12/10/2018: Procedura di interfaccia per allarme RTB/RTF"
+        },
+        {
+          "file": "DE/DE 3_2013.pdf",
+          "oggetto": "Disposizione di Esercizio n° 3 del 13 FEB. 2013 - Intese verbali fra titolare dell'interruzione e DCO/DM"
+        },
+        {
+          "file": "PE/PE 3763_2009.pdf",
+          "oggetto": "Prescrizioni operative per gli impianti di trazione elettrica a 25 kV sulla tratta AV/AC Bologna-Firenze, inclusi assetti di alimentazione, sicurezza e manutenzione."
+        },
+        {
+          "file": "PE/PE 528 del 21.3.2023.pdf",
+          "oggetto": "Prescrizione di esercizio: Procedura di interfaccia per chiamata rapida GSM-R con numerazione 1300"
+        },
+        {
+          "file": "PE/PE 1395_2012.pdf",
+          "oggetto": "Prescrizione di esercizio per considerare tratti di linee tradizionali nel nodo di Bologna come affiancati alla linea AV/AC Milano-Bologna-Firenze."
+        },
+        {
+          "file": "PE/PE 3375_2009.pdf",
+          "oggetto": "Prescrizioni operative per gli impianti di trazione elettrica a 25 kV sulla sub-tratta AV/AC Novara-Milano, con dettagli su alimentazione e sicurezza."
+        },
+        {
+          "file": "PE/PE 1855_2005.pdf",
+          "oggetto": "Prescrizioni e istruzioni particolari per l'esercizio degli impianti di trazione elettrica a 25 kV sulla sub-tratta AV/AC Torino-Novara."
+        }
+      ]
+    },
+    "RS Ristampa 2026": {
+      "impatti_file": "RS Impatti.pdf",
+      "da_citazione": [
+        "NOTE/Nota 15_1985.pdf",
+        "NOTE/Nota 121_1985.pdf",
+        "NOTE/Nota 3_76_1998.pdf",
+        "NOTE/Nota 60_1998.pdf",
+        "NOTE/Nota 51_1998.pdf",
+        "DGI/DGI 26_2005.pdf",
+        "DE/DE 1_2013.pdf",
+        "DE/DE 16_2013.pdf",
+        "DE/DE 1_2014.pdf",
+        "DE/DE 5_2014+DPR 3127_2014.pdf",
+        "DE/DE 12_2014.pdf",
+        "DE/DE 11_2014.pdf",
+        "PE/PE 741_2015.pdf",
+        "PE/PE 1499_2015.pdf",
+        "PE/PE 1528_2017.pdf",
+        "PE/PE 1572_2017.pdf",
+        "PE/PE 2150-2020.pdf",
+        "NOTE/Nota 1047-2021.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 20_2016.pdf",
+          "oggetto": "Disposizione di esercizio per l'attivazione della tratta Bivio Casirate - Bivio/PC Roncadelle della linea AV/AC Milano - Brescia"
+        },
+        {
+          "file": "PE/PE 2150_2020.pdf",
+          "oggetto": "Prescrizione di esercizio per la segnalazione di coda dei treni merci"
+        },
+        {
+          "file": "PE/PE 1513_2006.pdf",
+          "oggetto": "Normativa per l'esercizio sperimentale degli impianti di rilevamento venti trasversali (RVT) sulla Linea AV/AC Roma - Napoli"
+        },
+        {
+          "file": "PE/PE 5256_2008.pdf",
+          "oggetto": "Prescrizione per la gestione dei rallentamenti in zona di confine a Bivio/PC Melegnano"
+        },
+        {
+          "file": "PE/PE 1834_2014.pdf",
+          "oggetto": "Prescrizione di esercizio che integra la normativa RTB, consentendo il collegamento degli allarmi ai segnali di Posti di Blocco Intermedi (PBA) e definendo le relative procedure di circolazione e le caratteristiche dei segnali."
+        },
+        {
+          "file": "PE/PE 2068_2009.pdf",
+          "oggetto": "Prescrizione di esercizio. Estensione di prescrizioni per linea AV/AC Milano-Bologna a Bologna-Firenze"
+        },
+        {
+          "file": "PE/PE 1426-2023.pdf",
+          "oggetto": "Prescrizione di esercizio per la retrocessione dei treni sulle linee AV/AC attrezzate con ERTMS/ETCS L2, definendo procedure per l'inversione del blocco radio e la sicurezza operativa."
+        },
+        {
+          "file": "PE/PE 1647_2005.pdf",
+          "oggetto": "Prescrizione: Immissione dati/inizio missione in finestra TAF sulla linea AC/AV Roma-Napoli."
+        },
+        {
+          "file": "PE/PE 86-22.pdf",
+          "oggetto": "Prescrizione di esercizio per la circolazione dei convogli da e verso i raccordi in linea"
+        },
+        {
+          "file": "DGI/DGI 27-2004 ristampa 2024.pdf",
+          "oggetto": "Disposizione RFI che definisce le procedure per la gestione delle interruzioni sulle linee ferroviarie telecomandate e a dirigenza locale, inclusa la circolazione dei mezzi d'opera."
+        },
+        {
+          "file": "DGI/DGI 23_2008.pdf",
+          "oggetto": "Modalità per la circolazione dei treni ML e dei carrelli sulla linea AV/AC Milano – Bologna attrezzata con ERTMS/ETCS L2"
+        },
+        {
+          "file": "DGI/DGI 27_2004.pdf",
+          "oggetto": "Disposizione RFI che unifica le norme per le interruzioni sulle linee telecomandate e a dirigenza locale, inclusi PdS e procedure durante i periodi di sospensione."
+        },
+        {
+          "file": "DGI/DGI 34_2008.pdf",
+          "oggetto": "Entrata in vigore del Decreto 01/08 (09/12/2008) per l'esercizio ETCS L2 su linea AV/AC Milano-Bologna e abrogazione di disposizioni precedenti."
+        },
+        {
+          "file": "DGI/DGI 8_2009.pdf",
+          "oggetto": "Modifiche sperimentali per l'attivazione del pre-esercizio sulla linea Bologna - Firenze"
+        },
+        {
+          "file": "DGI/DGI 33_2008.pdf",
+          "oggetto": "Disposizione RFI che stabilisce la data di entrata in vigore delle modifiche ai Regolamenti per la Circolazione dei Treni e sui Segnali per linee AV/AC con ERTMS/ETCS L2."
+        },
+        {
+          "file": "DGI/DGI 7_2009.pdf",
+          "oggetto": "Modifiche sperimentali per il pre-esercizio della linea AC/AV Bologna-Firenze"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/Decreto 13_2009.pdf",
+          "oggetto": "Modifiche alle norme di esercizio per posti di esodo e nuove funzioni ERTMS/ETCS L2"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-DTC-NCRA0011P20210001047.pdf",
+          "oggetto": "Esiti delle riunioni di coordinamento funzionale su gestione rallentamenti, merci pericolose, ripresa marcia, PL pedonali e guasti RTB/RTF."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/Raccolta dei chiarimenti tecnico-normativi di circolazione.pdf",
+          "oggetto": "Raccolta di chiarimenti tecnico-normativi per la circolazione dei treni, la protezione dei cantieri e la segnaletica ferroviaria."
+        }
+      ]
+    },
+    "ACC - A": {
+      "impatti_file": "impatti ACC - A.pdf",
+      "da_citazione": [
+        "DE/DE 57_2006.pdf",
+        "NOTE/Nota 20_2018.pdf"
+      ],
+      "da_contenuto": []
+    },
+    "ACC - B - ERTMS ETCS L2": {
+      "impatti_file": "impatti ACC - B - ERTMS ETCS L2.pdf",
+      "da_citazione": [
+        "NOTE/Nota 20_2018.pdf"
+      ],
+      "da_contenuto": []
+    },
+    "IEAC ACCM": {
+      "impatti_file": "impatti ACCM - SB.pdf",
+      "da_citazione": [
+        "DE/DE 57_2006.pdf",
+        "NOTE/Nota 521_2017.pdf",
+        "NOTE/Nota 20_2018.pdf",
+        "NOTE/Nota 434_2018.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 20_2016.pdf",
+          "oggetto": "Disposizione di esercizio per l'attivazione della tratta Bivio Casirate - Bivio/PC Roncadelle della linea AV/AC Milano - Brescia"
+        },
+        {
+          "file": "DE/DE 21_2013.pdf",
+          "oggetto": "Modifiche a Istruzioni di servizio, Disposizioni e Prescrizioni di esercizio"
+        },
+        {
+          "file": "DE/DE 3_2012.pdf",
+          "oggetto": "Attivazione all'esercizio e norme particolari per l'esercizio del tratto di linea AV/AC \"Passante AV di Bologna\""
+        },
+        {
+          "file": "DE/DE_16_2022.pdf",
+          "oggetto": "Procedura di interfaccia. Upgrading tecnologico a standard AV/AC della tratta PM Rovezzano - 1º Bivio Orvieto Sud della linea Roma - Firenze (DD): estensione norme e particolarità tecnico-normative"
+        },
+        {
+          "file": "DE/DE 29-2021.pdf",
+          "oggetto": "Trasmissione e dettaglio delle modifiche alle Istruzioni per l'esercizio con sistemi di blocco elettrico (IESBE Parti III e V) e alle istruzioni per l'esercizio con sistemi ETCS/ERTMS L2."
+        },
+        {
+          "file": "PE/PE 2066_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per la funzione 'verifica occupazione cdb di linea' dell'ACCM di Bologna sulla linea AV/AC Milano-Firenze, definendo modalità di attivazione/disattivazione e ruoli operativi."
+        },
+        {
+          "file": "PE/PE 4543_2008.pdf",
+          "oggetto": "Prescrizione: Apparati Centrali Computerizzati dei Posti di Servizio PJ2 della linea AV/AC Milano – Bologna."
+        },
+        {
+          "file": "PE/PE 3752_2013.pdf",
+          "oggetto": "Prescrizione operativa RFI sull'uso della 'Liberazione artificiale del percorso dell'itinerario' nei PdS della tratta AV/AC Milano-Firenze, con restrizioni in assenza di treni."
+        },
+        {
+          "file": "PE/PE 3301_2013.pdf",
+          "oggetto": "Prescrizione di esercizio per la stazione di Arezzo"
+        },
+        {
+          "file": "DGI/DGI 29_2008.pdf",
+          "oggetto": "Norme particolari per l'esercizio degli impianti di rilevamento temperatura boccole (RTB) sulla linea AV/AC Milano - Bologna"
+        },
+        {
+          "file": "DGI/DGI 10_2009.pdf",
+          "oggetto": "Disposizioni di Esercizio per l'attivazione del pre-esercizio sulla linea Bologna - Firenze"
+        },
+        {
+          "file": "DGI/DGI 24_2008.pdf",
+          "oggetto": "Istruzione per l'impiego delle chiavi di zona sulla linea AV/AC Milano – Bologna attrezzata con ERTMS/ETCS L2"
+        },
+        {
+          "file": "DGI/DGI 20_2009.pdf",
+          "oggetto": "Attivazione all'esercizio commerciale della linea AV/AC Bologna – Firenze e estensione delle norme di esercizio, incluse quelle relative a ERTMS/ETCS L2 e ACCM."
+        },
+        {
+          "file": "DGI/DGI 26_2008.pdf",
+          "oggetto": "Istruzioni per l'esercizio del Sistema Comando e Controllo (SCC/M) su linea AV/AC Milano-Bologna con ERTMS/ETCS L2, inclusi messaggistica e successione treni."
+        }
+      ]
+    },
+    "ACE": {
+      "impatti_file": "impatti ACE.pdf",
+      "da_citazione": [
+        "NOTE/Nota 20_2018.pdf",
+        "DE/DE 13-2018.pdf"
+      ],
+      "da_contenuto": []
+    },
+    "ACEI": {
+      "impatti_file": "impatti ACEI.pdf",
+      "da_citazione": [
+        "NOTE/Nota 15_1988.pdf",
+        "NOTE/Nota 2839_1990.pdf",
+        "DE/DE 57_2006.pdf",
+        "NOTE/Nota 20_2018.pdf"
+      ],
+      "da_contenuto": []
+    },
+    "IPC (vers. DE n° 14-2018)": {
+      "impatti_file": "impatti IPC (vers. cui DE 14-2018).pdf",
+      "da_citazione": [
+        "DGI/DGI  27_2004.pdf",
+        "PE/PE 1517_2015.pdf",
+        "PE/PE 2488_2017.pdf",
+        "NOTE/Nota 938_2023.pdf"
+      ],
+      "da_contenuto": []
+    },
+    "IPC": {
+      "impatti_file": "impatti IPC.pdf",
+      "da_citazione": [
+        "DGI/DGI  27_2004.pdf",
+        "PE/PE 1517_2015.pdf",
+        "PE/PE 2488_2017.pdf",
+        "NOTE/Nota 938_2023.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 19_2013.pdf",
+          "oggetto": "Modifiche all'Istruzione per la protezione dei cantieri"
+        },
+        {
+          "file": "DE/DE 6_2017.pdf",
+          "oggetto": "Riordino e aggiornamento delle norme di esercizio per linee AV/AC con ERTMS/ETCS L2 senza segnali fissi e per l'istruzione del blocco radio sulla IFN."
+        },
+        {
+          "file": "DE/DE 01-2023.pdf",
+          "oggetto": "Disposizione di esercizio n. 1 del 31/3/2023: Allineamento e modifiche normative"
+        },
+        {
+          "file": "PE/PE 820_2007.pdf",
+          "oggetto": "Prescrizioni per i movimenti di retrocessione su linea AV con mezzi di trazione dotati di SSB ERTMS/ETCS - Ansaldo (ASF)."
+        },
+        {
+          "file": "PE/PE 2441_2017.pdf",
+          "oggetto": "Prescrizione di esercizio. Particolarità di impianto della linea AV Roma - Napoli."
+        },
+        {
+          "file": "PE/PE 3645_2007.pdf",
+          "oggetto": "Prescrizione con norme integrative per l'impiego dei sistemi di bordo SSB ETCS/SCMT Alstom ed Ansaldo, focalizzata su inserzione dati, transizioni e operazioni su linee AC/AV per il Personale di Condotta."
+        },
+        {
+          "file": "PE/PE 3838_2008.pdf",
+          "oggetto": "Prescrizione per la circolazione in Staff Responsible con SSB Ansaldo e gestione funzione RSC nel Bivio/PC Melegnano."
+        },
+        {
+          "file": "PE/PE 4600_2008.pdf",
+          "oggetto": "Prescrizione per la ripresa della marcia dopo allarme RTB al segnale di protezione del Bivio/PC Melegnano sulla linea AC/AV Bologna/Milano."
+        },
+        {
+          "file": "DGI/DGI 27_2006.pdf",
+          "oggetto": "Stabilisce le norme di esercizio per l'uso della telefonia mobile GSM-R (terra-treno, bordo-bordo, terra-terra), modificando istruzioni esistenti e aggiornando i Fascicoli Linea."
+        },
+        {
+          "file": "DGI/DGI 34_2008.pdf",
+          "oggetto": "Entrata in vigore del Decreto 01/08 (09/12/2008) per l'esercizio ETCS L2 su linea AV/AC Milano-Bologna e abrogazione di disposizioni precedenti."
+        },
+        {
+          "file": "DGI/DGI 24_2008.pdf",
+          "oggetto": "Istruzione per l'impiego delle chiavi di zona sulla linea AV/AC Milano – Bologna attrezzata con ERTMS/ETCS L2"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-SVS.NCR.A0011.P.2023.0000938.pdf",
+          "oggetto": "Esiti delle riunioni di coordinamento funzionale – documento n. 1/2023"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-SVS.NCR-A0011-P-2023-0000938.pdf",
+          "oggetto": "Chiarimenti normativi su Sistema Centrale di Registrazione, interruzione binari, linee SCC/CTC, guasti post-interruzione e coordinamento manovre MdO."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/Raccolta dei chiarimenti tecnico-normativi di circolazione.pdf",
+          "oggetto": "Raccolta di chiarimenti tecnico-normativi per la circolazione dei treni, la protezione dei cantieri e la segnaletica ferroviaria."
+        }
+      ]
+    },
+    "PGOS-RFI": {
+      "impatti_file": "impatti PGOS-RFI.pdf",
+      "da_citazione": [
+        "PE/PE 362_2002.pdf",
+        "RFI-FILE NORMATIVI MISTI/21_2003.pdf",
+        "DE/DE 19_2016.pdf",
+        "DE/DE 18_2016.pdf",
+        "PE/PE 2085_2016.pdf",
+        "PE/PE 2749_2016.pdf",
+        "DE/DE 2_2017.pdf",
+        "PE/PE 3514_2017.pdf",
+        "PE/PE 900_2019.pdf",
+        "PE/PE 2207_2020.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 21_2016.pdf",
+          "oggetto": "Istruzione per la gestione dell'Interfaccia Operatore RBC - Linee AV/AC Milano - Bologna e Milano - Brescia"
+        },
+        {
+          "file": "DE/DE 8_2013.pdf",
+          "oggetto": "Istruzione per la Circolazione dei Mezzi d'Opera"
+        },
+        {
+          "file": "PE/PE 1737_2006.pdf",
+          "oggetto": "Prescrizione per l'utilizzo di locomotive D 445 modificate, anche in comando multiplo, per il soccorso di complessi ETR 500 su linee AV/AC, definendo procedure operative e limiti di velocità."
+        },
+        {
+          "file": "DGI/DGI 46_2006.pdf",
+          "oggetto": "Modifiche alle Disposizioni per l'esercizio in telecomando e altre istruzioni ferroviarie"
+        },
+        {
+          "file": "DGI/DGI 8_2009.pdf",
+          "oggetto": "Modifiche sperimentali per l'attivazione del pre-esercizio sulla linea Bologna - Firenze"
+        },
+        {
+          "file": "DGI/DGI 7_2009.pdf",
+          "oggetto": "Modifiche sperimentali per il pre-esercizio della linea AC/AV Bologna-Firenze"
+        },
+        {
+          "file": "NOTE/Nota 963_2003.pdf",
+          "oggetto": "Variazioni in corso d'orario e procedure Schede Treno Aster/VCO"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/Decreto 13_2009.pdf",
+          "oggetto": "Modifiche alle norme di esercizio per posti di esodo e nuove funzioni ERTMS/ETCS L2"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-DTC-NCRA0011P20210001047.pdf",
+          "oggetto": "Esiti delle riunioni di coordinamento funzionale su gestione rallentamenti, merci pericolose, ripresa marcia, PL pedonali e guasti RTB/RTF."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-SVS.NCR.NSCPECP20220000003.pdf",
+          "oggetto": "Comunicazione sulle modalità di trasmissione dei dati di composizione dei treni con Trasporti Eccezionali, Merci Pericolose e Trasporti Combinati Codificati."
+        }
+      ]
+    },
+    "RCT - Ristampa 2026": {
+      "impatti_file": "impatti RCT.pdf",
+      "da_citazione": [
+        "NOTE/Nota 61_1997.pdf",
+        "NOTE/Nota 3013_1997.pdf",
+        "NOTE/Nota 54_2001.pdf",
+        "NOTE/Nota 312_2002.pdf",
+        "PE/PE 963_2003.pdf",
+        "DGI/DGI 4_2004.pdf",
+        "DGI/DGI  27_2004.pdf",
+        "PE/PE 484_2005.pdf",
+        "DGI/DGI 19_2006.pdf",
+        "PE/PE 5162_2008.pdf",
+        "DGI/DGI 31_2008.pdf",
+        "PE/PE 853_2011.pdf",
+        "DE/DE 10_2013.pdf",
+        "DE/DE 26_2013.pdf",
+        "DE/DE 1_2014.pdf",
+        "DE/DE 5_2014+DPR 3127_2014.pdf",
+        "NOTE/Nota 1760_2014.pdf",
+        "NOTE/Nota 1618_2015.pdf",
+        "NOTE/Nota 20_2018.pdf",
+        "NOTE/Nota 2014_2018.pdf",
+        "NOTE/Nota 1047-2021.pdf",
+        "NOTE/Nota 394-2022.pdf",
+        "NOTE/Nota 938_2023.pdf",
+        "PE/PE n. 1526 del 26.7.2024.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 19_2013.pdf",
+          "oggetto": "Modifiche all'Istruzione per la protezione dei cantieri"
+        },
+        {
+          "file": "DE/DE 31_2005.pdf",
+          "oggetto": "Disposizioni tecniche e normative per l'esercizio del Sistema Comando e Controllo (SCC) - Linee ad Alta Capacità/Alta Velocità (AC/AV) – ETCS L 2 senza segnali fissi luminosi"
+        },
+        {
+          "file": "DE/DE 5_2014 + DPR 3127_2014.pdf",
+          "oggetto": "Disposizione di Esercizio n. 5 del 9/4/2014 riguardante il passaggio ora solare/ora legale e viceversa."
+        },
+        {
+          "file": "DE/DE 4_2020.pdf",
+          "oggetto": "Modifiche alle Istruzioni per l'esercizio delle linee ERTMS/ETCS L2 senza segnali fissi luminosi, in particolare per la gestione dell'indisponibilità dei Posti di Esodo."
+        },
+        {
+          "file": "PE/PE 2218_2007.pdf",
+          "oggetto": "Prescrizione per la gestione di ripetizioni in sicurezza tramite interfaccia operatore RBC"
+        },
+        {
+          "file": "PE/PE 3398_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per l'affiancamento tra linee AV/AC e tradizionali nel tratto Rho Fiera - Milano Certosa, con riferimento al RCT."
+        },
+        {
+          "file": "PE/PE 5212_2008.pdf",
+          "oggetto": "Prescrizione per limitazione di velocità a 150 km/h per treni ETR su linea AV/AC Milano-Bologna con ERTMS/ETCS L2 a seguito di allarme RTB."
+        },
+        {
+          "file": "PE/PE 5213_2008.pdf",
+          "oggetto": "Modifica le norme di circolazione per carrelli e treni materiali su linee AV/AC con ERTMS/ETCS L2, limitando la velocità massima a 60 Km/h."
+        },
+        {
+          "file": "PE/PE 1924_2006.pdf",
+          "oggetto": "Autorizzazione per la circolazione contemporanea di treni con blocco orientato a destra su entrambi i binari della linea AC/AV Torino-Novara, secondo ERTMS/ETCS L2."
+        },
+        {
+          "file": "PE/PE 1737_2006.pdf",
+          "oggetto": "Prescrizione per l'utilizzo di locomotive D 445 modificate, anche in comando multiplo, per il soccorso di complessi ETR 500 su linee AV/AC, definendo procedure operative e limiti di velocità."
+        },
+        {
+          "file": "PE/PE 3376_2009.pdf",
+          "oggetto": "Prescrizione di esercizio - Particolarità d'impianto della linea AV/AC Torino - Milano"
+        },
+        {
+          "file": "PE/PE 528 del 21.3.2023.pdf",
+          "oggetto": "Prescrizione di esercizio: Procedura di interfaccia per chiamata rapida GSM-R con numerazione 1300"
+        },
+        {
+          "file": "PE/PE 1527_2017.pdf",
+          "oggetto": "Prescrizione di esercizio. Procedura di interfaccia. Particolarità della linea AV/AC Bologna - Firenze."
+        },
+        {
+          "file": "PE/PE 2170_2015.pdf",
+          "oggetto": "Prescrizione di esercizio per la circolazione dei treni in modalità Staff Responsible a Bologna Centrale AV, con istruzioni su itinerari e sicurezza."
+        },
+        {
+          "file": "PE/PE 2171_2015.pdf",
+          "oggetto": "Prescrizione di esercizio. Circolazione dei treni nella stazione di Reggio Emilia AV Mediopadana."
+        },
+        {
+          "file": "PE/PE 1395_2012.pdf",
+          "oggetto": "Prescrizione di esercizio per considerare tratti di linee tradizionali nel nodo di Bologna come affiancati alla linea AV/AC Milano-Bologna-Firenze."
+        },
+        {
+          "file": "PE/PE 5214_2008.pdf",
+          "oggetto": "Chiarimento gestione allarme caldo su linea AV/AC con sistema ERTMS/ETCS L2"
+        },
+        {
+          "file": "PE/PE 5256_2008.pdf",
+          "oggetto": "Prescrizione per la gestione dei rallentamenti in zona di confine a Bivio/PC Melegnano"
+        },
+        {
+          "file": "PE/PE 3859_2008.pdf",
+          "oggetto": "Istruzioni per l'uso di apparecchiature di registrazione vocale presso il Posto Centrale DCO della linea AV/AC Milano-Bologna per comunicazioni operative e di manutenzione."
+        },
+        {
+          "file": "PE/PE 2660_2009.pdf",
+          "oggetto": "Prescrizione di esercizio. Estensione di alcune prescrizioni di esercizio della linea AV/AC Torino - Novara alla tratta di linea AV/AC Novara - Milano attrezzata con ERTMS/ETCS L2."
+        },
+        {
+          "file": "PE/PE 1834_2014.pdf",
+          "oggetto": "Prescrizione di esercizio che integra la normativa RTB, consentendo il collegamento degli allarmi ai segnali di Posti di Blocco Intermedi (PBA) e definendo le relative procedure di circolazione e le caratteristiche dei segnali."
+        },
+        {
+          "file": "PE/PE 2068_2009.pdf",
+          "oggetto": "Prescrizione di esercizio. Estensione di prescrizioni per linea AV/AC Milano-Bologna a Bologna-Firenze"
+        },
+        {
+          "file": "PE/PE 1426-2023.pdf",
+          "oggetto": "Prescrizione di esercizio per la retrocessione dei treni sulle linee AV/AC attrezzate con ERTMS/ETCS L2, definendo procedure per l'inversione del blocco radio e la sicurezza operativa."
+        },
+        {
+          "file": "PE/PE 1647_2005.pdf",
+          "oggetto": "Prescrizione: Immissione dati/inizio missione in finestra TAF sulla linea AC/AV Roma-Napoli."
+        },
+        {
+          "file": "PE/PE 3680_2009.pdf",
+          "oggetto": "Prescrizione di esercizio che consente di considerare la linea tradizionale Gricignano-Napoli via Aversa affiancata alla linea AV/AC 1° Bivio/P.C. Gricignano-Napoli per la circolazione dei treni."
+        },
+        {
+          "file": "PE/PE 86-22.pdf",
+          "oggetto": "Prescrizione di esercizio per la circolazione dei convogli da e verso i raccordi in linea"
+        },
+        {
+          "file": "PE/PE 1186_2010.pdf",
+          "oggetto": "Prescrizione di esercizio: utilizzo delle apparecchiature di registrazione vocale"
+        },
+        {
+          "file": "PE/PE 2243_2006.pdf",
+          "oggetto": "Prescrizione sulle regole e procedure per la variazione in corso d'orario delle tracce dei treni, basata su articoli specifici del Regolamento Circolazione Treni (RCT)."
+        },
+        {
+          "file": "PE/PE 3445_2012.pdf",
+          "oggetto": "Prescrizione di esercizio. Linea Milano - Bologna - Firenze: affiancamento della linea tradizionale alla linea AV/AC."
+        },
+        {
+          "file": "PE/PE 5119_2008.pdf",
+          "oggetto": "Prescrizione sulla limitazione di velocità per il primo treno circolante sulle linee AV/AC dopo l'intervallo notturno, abrogando una precedente disposizione."
+        },
+        {
+          "file": "DGI/DGI 17_2009.pdf",
+          "oggetto": "Annuncio dell'entrata in vigore del Decreto 13/2009 dell'ANSF, che modifica le norme di esercizio per le linee AV/AC con ERTMS/ETCS L2, dal 2 dicembre 2009."
+        },
+        {
+          "file": "DGI/DGI 31_2005.pdf",
+          "oggetto": "Disposizioni tecniche e normative per l'esercizio del Sistema Comando e Controllo (SCC)"
+        },
+        {
+          "file": "DGI/DGI 27-2004 ristampa 2024.pdf",
+          "oggetto": "Disposizione RFI che definisce le procedure per la gestione delle interruzioni sulle linee ferroviarie telecomandate e a dirigenza locale, inclusa la circolazione dei mezzi d'opera."
+        },
+        {
+          "file": "DGI/DGI 27_2004.pdf",
+          "oggetto": "Disposizione RFI che unifica le norme per le interruzioni sulle linee telecomandate e a dirigenza locale, inclusi PdS e procedure durante i periodi di sospensione."
+        },
+        {
+          "file": "DGI/DGI 8_2009.pdf",
+          "oggetto": "Modifiche sperimentali per l'attivazione del pre-esercizio sulla linea Bologna - Firenze"
+        },
+        {
+          "file": "DGI/DGI 33_2008.pdf",
+          "oggetto": "Disposizione RFI che stabilisce la data di entrata in vigore delle modifiche ai Regolamenti per la Circolazione dei Treni e sui Segnali per linee AV/AC con ERTMS/ETCS L2."
+        },
+        {
+          "file": "DGI/DGI 10_2009.pdf",
+          "oggetto": "Disposizioni di Esercizio per l'attivazione del pre-esercizio sulla linea Bologna - Firenze"
+        },
+        {
+          "file": "DGI/DGI 11_2009.pdf",
+          "oggetto": "Disposizioni di Esercizio per l'attivazione del pre-esercizio sulla linea Bologna - Firenze"
+        },
+        {
+          "file": "DGI/DGI 7_2009.pdf",
+          "oggetto": "Modifiche sperimentali per il pre-esercizio della linea AC/AV Bologna-Firenze"
+        },
+        {
+          "file": "DGI/DGI 14_2009.pdf",
+          "oggetto": "Disposizione di esercizio n. 14 del 28/10/2009 - Attivazione pre-esercizio AV/AC Novara-Milano"
+        },
+        {
+          "file": "NOTE/Nota Dispositiva RFI-VDO.DCO.PC.SC-A0011-P-2023-0000037 del 03.11.2023.pdf",
+          "oggetto": "Chiarimenti sulla funzione di sicurezza di 'dirigenza delle manovre' e le responsabilità associate negli scenari di manovra, incluso il nuovo scenario 5bis."
+        },
+        {
+          "file": "NOTE/Nota 963_2003.pdf",
+          "oggetto": "Variazioni in corso d'orario e procedure Schede Treno Aster/VCO"
+        },
+        {
+          "file": "NOTE/Nota RFI-DTC-NCR 2022_07_04 1184.pdf",
+          "oggetto": "Esiti riunioni di coordinamento funzionale su invio mezzi soccorso, omissione segnali pantografi e FL"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-SVS.NCR.A0011.P.2023.0000938.pdf",
+          "oggetto": "Esiti delle riunioni di coordinamento funzionale – documento n. 1/2023"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/Decreto 13_2009.pdf",
+          "oggetto": "Modifiche alle norme di esercizio per posti di esodo e nuove funzioni ERTMS/ETCS L2"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-VDO.DTC-A0011-P-2024-0001284.pdf",
+          "oggetto": "Chiarimenti normativi su manovra deviatoi, interruzione binari con veicoli in sosta, cessione titolarità interruzioni e stazionamento veicoli in impianti non presenziati."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-VDO.DTC-A0011-P-2024-0001284 del 26.6.2024.pdf",
+          "oggetto": "Chiarimenti normativi su manovra deviatoi, interruzione binari con veicoli in sosta, cessione titolarità interruzioni e stazionamento veicoli in impianti non presenziati."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-SVS.NCR-A0011-P-2023-0000938.pdf",
+          "oggetto": "Chiarimenti normativi su Sistema Centrale di Registrazione, interruzione binari, linee SCC/CTC, guasti post-interruzione e coordinamento manovre MdO."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-DTC-NCRA0011P20210001047.pdf",
+          "oggetto": "Esiti delle riunioni di coordinamento funzionale su gestione rallentamenti, merci pericolose, ripresa marcia, PL pedonali e guasti RTB/RTF."
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/Raccolta dei chiarimenti tecnico-normativi di circolazione.pdf",
+          "oggetto": "Raccolta di chiarimenti tecnico-normativi per la circolazione dei treni, la protezione dei cantieri e la segnaletica ferroviaria."
+        }
+      ]
+    },
+    "IEPL": {
+      "impatti_file": "prospetto impatti IEPL.pdf",
+      "da_citazione": [
+        "NOTE/Nota 456_1982.pdf",
+        "NOTE/Nota 53_1984.pdf",
+        "NOTE/Nota 2254_1990.pdf",
+        "NOTE/Nota 1_1993.pdf",
+        "NOTE/Nota 3_76_1998.pdf",
+        "PE/PE 56_2016.pdf",
+        "NOTE/Nota 6008_2017.pdf",
+        "NOTE/Nota 479_2018.pdf",
+        "NOTE/Nota 856_2019.pdf",
+        "PE/PE 1195-2023.pdf"
+      ],
+      "da_contenuto": [
+        {
+          "file": "DGI/DGI 29_2008.pdf",
+          "oggetto": "Norme particolari per l'esercizio degli impianti di rilevamento temperatura boccole (RTB) sulla linea AV/AC Milano - Bologna"
+        }
+      ]
+    },
+    "IETCS-RdC Edizione 2026": {
+      "impatti_file": null,
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 8_2016.pdf",
+          "oggetto": "Istruzioni operative per l'Interfaccia Operatore RBC sulla linea AV/AC Roma-Napoli, gestendo rallentamenti, arresti d'emergenza e PCF/POC in ambiente ERTMS/ETCS L2."
+        },
+        {
+          "file": "DE/DE 16_2018.pdf",
+          "oggetto": "Modifiche alle NELAV (Norme per l'esercizio delle linee AV/AC con ERTMS/ETCS L2) riguardanti la gestione della connessione radio e l'interfaccia con l'agente di condotta."
+        },
+        {
+          "file": "DE/DE 4_2020.pdf",
+          "oggetto": "Modifiche alle Istruzioni per l'esercizio delle linee ERTMS/ETCS L2 senza segnali fissi luminosi, in particolare per la gestione dell'indisponibilità dei Posti di Esodo."
+        },
+        {
+          "file": "PE/PE 5212_2008.pdf",
+          "oggetto": "Prescrizione per limitazione di velocità a 150 km/h per treni ETR su linea AV/AC Milano-Bologna con ERTMS/ETCS L2 a seguito di allarme RTB."
+        },
+        {
+          "file": "PE/PE 5213_2008.pdf",
+          "oggetto": "Modifica le norme di circolazione per carrelli e treni materiali su linee AV/AC con ERTMS/ETCS L2, limitando la velocità massima a 60 Km/h."
+        },
+        {
+          "file": "PE/PE 1924_2006.pdf",
+          "oggetto": "Autorizzazione per la circolazione contemporanea di treni con blocco orientato a destra su entrambi i binari della linea AC/AV Torino-Novara, secondo ERTMS/ETCS L2."
+        },
+        {
+          "file": "PE/PE 268_2006.pdf",
+          "oggetto": "Prescrizione sull'immobilizzazione dei deviatoi sulle Linee AC/AV attrezzate con ERTMS/ETCSL2."
+        },
+        {
+          "file": "PE/PE 1846_2005.pdf",
+          "oggetto": "Prescrizione RFI su limitazioni di velocità (150 km/h) per treni ETR 500 PLT su linea AC/AV Torino-Novara con ERTMS/ETCSL2 a seguito di allarmi RTB (Caldo/Caldissimo)."
+        },
+        {
+          "file": "PE/PE 1432_2006.pdf",
+          "oggetto": "Prescrizione per il soccorso di treni su linee AC/AV con mezzi non ERTMS/ETCS L2, definendo procedure per il DCO in PdS telecomandati."
+        },
+        {
+          "file": "PE/PE 1432_2012.pdf",
+          "oggetto": "Integrazione normativa per la gestione degli allarmi RTB su linee AC/AV con ERTMS/ETCS L2, specificando le procedure per il DCO in caso di disconnessione dal RBC."
+        },
+        {
+          "file": "PE/PE 3752_2013.pdf",
+          "oggetto": "Prescrizione operativa RFI sull'uso della 'Liberazione artificiale del percorso dell'itinerario' nei PdS della tratta AV/AC Milano-Firenze, con restrizioni in assenza di treni."
+        },
+        {
+          "file": "PE/PE 1296_2005.pdf",
+          "oggetto": "Prescrizione RFI del 2005 su procedure operative e limitazioni di velocità per treni ETR 500 PLT su linee AC/AV con ERTMS/ETCSL2 a seguito di allarmi RTB."
+        },
+        {
+          "file": "PE/PE 2061_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per la circolazione contemporanea di treni a destra sulla linea AV/AC Bologna S.Ruffillo - Firenze Castello con ERTMS/ETCS L2."
+        },
+        {
+          "file": "PE/PE 3645_2007.pdf",
+          "oggetto": "Prescrizione con norme integrative per l'impiego dei sistemi di bordo SSB ETCS/SCMT Alstom ed Ansaldo, focalizzata su inserzione dati, transizioni e operazioni su linee AC/AV per il Personale di Condotta."
+        },
+        {
+          "file": "PE/PE 1426-2023.pdf",
+          "oggetto": "Prescrizione di esercizio per la retrocessione dei treni sulle linee AV/AC attrezzate con ERTMS/ETCS L2, definendo procedure per l'inversione del blocco radio e la sicurezza operativa."
+        },
+        {
+          "file": "PE/PE 3680_2009.pdf",
+          "oggetto": "Prescrizione di esercizio che consente di considerare la linea tradizionale Gricignano-Napoli via Aversa affiancata alla linea AV/AC 1° Bivio/P.C. Gricignano-Napoli per la circolazione dei treni."
+        },
+        {
+          "file": "PE/PE 3379_2009.pdf",
+          "oggetto": "Integrazioni alla normativa per l'esercizio degli impianti RTB sulle linee AC/AV con ERTMS/ETCS L2, includendo la rilevazione di assi frenati."
+        },
+        {
+          "file": "PE/PE 881_2022.pdf",
+          "oggetto": "Prescrizione di esercizio per l'attivazione di zone di manovra e comando di istradamenti su linee ERTMS/ETCS."
+        },
+        {
+          "file": "DGI/DGI 17_2009.pdf",
+          "oggetto": "Annuncio dell'entrata in vigore del Decreto 13/2009 dell'ANSF, che modifica le norme di esercizio per le linee AV/AC con ERTMS/ETCS L2, dal 2 dicembre 2009."
+        },
+        {
+          "file": "DGI/DGI 16_2009.pdf",
+          "oggetto": "Attivazione dell'esercizio commerciale sulla linea AV/AC Novara-Milano con sistema ERTMS/ETCS L2, implementando norme ANSF e disposizioni specifiche per RTB."
+        },
+        {
+          "file": "DGI/DGI 51_2005.pdf",
+          "oggetto": "Definisce le normative per l'esercizio degli impianti di rilevamento temperatura boccole (RTB) sulle linee Alta Capacità/Alta Velocità (AC/AV) con ERTMS/ETCS L2."
+        },
+        {
+          "file": "DGI/DGI 34_2008.pdf",
+          "oggetto": "Entrata in vigore del Decreto 01/08 (09/12/2008) per l'esercizio ETCS L2 su linea AV/AC Milano-Bologna e abrogazione di disposizioni precedenti."
+        },
+        {
+          "file": "DGI/DGI 33_2008.pdf",
+          "oggetto": "Disposizione RFI che stabilisce la data di entrata in vigore delle modifiche ai Regolamenti per la Circolazione dei Treni e sui Segnali per linee AV/AC con ERTMS/ETCS L2."
+        },
+        {
+          "file": "DGI/DGI 20_2009.pdf",
+          "oggetto": "Attivazione all'esercizio commerciale della linea AV/AC Bologna – Firenze e estensione delle norme di esercizio, incluse quelle relative a ERTMS/ETCS L2 e ACCM."
+        },
+        {
+          "file": "DGI/DGI 45_2006.pdf",
+          "oggetto": "Modifica le norme per l'esercizio degli impianti RTB su linee AV/AC con ERTMS/ETCS L2, specificando la gestione degli allarmi impropri."
+        },
+        {
+          "file": "DGI/DGI 26_2008.pdf",
+          "oggetto": "Istruzioni per l'esercizio del Sistema Comando e Controllo (SCC/M) su linea AV/AC Milano-Bologna con ERTMS/ETCS L2, inclusi messaggistica e successione treni."
+        }
+      ]
+    },
+    "DETE 2023": {
+      "impatti_file": null,
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 31_2005.pdf",
+          "oggetto": "Disposizioni tecniche e normative per l'esercizio del Sistema Comando e Controllo (SCC) - Linee ad Alta Capacità/Alta Velocità (AC/AV) – ETCS L 2 senza segnali fissi luminosi"
+        },
+        {
+          "file": "DGI/DGI 31_2005.pdf",
+          "oggetto": "Disposizioni tecniche e normative per l'esercizio del Sistema Comando e Controllo (SCC)"
+        }
+      ]
+    },
+    "RID 2025": {
+      "impatti_file": null,
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 12_2021.pdf",
+          "oggetto": "Aggiornamento del testo normativo \"Estratto delle norme del RID\" per il trasporto ferroviario di merci pericolose, allineato all'edizione 2021 del RID."
+        },
+        {
+          "file": "DE/DE 5_2014 + DPR 3127_2014.pdf",
+          "oggetto": "Disposizione di Esercizio n. 5 del 9/4/2014 riguardante il passaggio ora solare/ora legale e viceversa."
+        },
+        {
+          "file": "PE/PE 2218_2007.pdf",
+          "oggetto": "Prescrizione per la gestione di ripetizioni in sicurezza tramite interfaccia operatore RBC"
+        },
+        {
+          "file": "PE/PE 2069_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per convogli diagnostici senza ERTMS/ETCS su linea AV/AC Bologna - Firenze"
+        },
+        {
+          "file": "PE/PE 1186_2010.pdf",
+          "oggetto": "Prescrizione di esercizio: utilizzo delle apparecchiature di registrazione vocale"
+        },
+        {
+          "file": "RFI-FILE NORMATIVI MISTI/RFI-SVS.NCR.NSCPECP20220000003.pdf",
+          "oggetto": "Comunicazione sulle modalità di trasmissione dei dati di composizione dei treni con Trasporti Eccezionali, Merci Pericolose e Trasporti Combinati Codificati."
+        }
+      ]
+    },
+    "E-RID": {
+      "impatti_file": null,
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 12_2021.pdf",
+          "oggetto": "Aggiornamento del testo normativo \"Estratto delle norme del RID\" per il trasporto ferroviario di merci pericolose, allineato all'edizione 2021 del RID."
+        },
+        {
+          "file": "PE/PE 1776_2013.pdf",
+          "oggetto": "Prescrizione di esercizio per l'estensione delle zone di uscita dei binari di precedenza 16 e 19 della stazione di Bologna AV a 81 metri, basata su analisi di sicurezza."
+        }
+      ]
+    },
+    "IESBE": {
+      "impatti_file": null,
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "DE/DE 29-2021.pdf",
+          "oggetto": "Trasmissione e dettaglio delle modifiche alle Istruzioni per l'esercizio con sistemi di blocco elettrico (IESBE Parti III e V) e alle istruzioni per l'esercizio con sistemi ETCS/ERTMS L2."
+        }
+      ]
+    },
+    "DELB": {
+      "impatti_file": null,
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "PE/PE 1433_2012.pdf",
+          "oggetto": "Autorizzazione alla circolazione contemporanea a destra su entrambi i binari nel Nodo di Bologna e Passante AV/AC, con condizioni relative a DELB e SCMT."
+        }
+      ]
+    },
+    "DET": {
+      "impatti_file": null,
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "PE/PE 371_2006.pdf",
+          "oggetto": "Prescrizione: Linee AC/AV - Soccorso ai treni con mezzi di trazione non attrezzati con ERTMS/ETCS L2"
+        },
+        {
+          "file": "PE/PE 3308_2009.pdf",
+          "oggetto": "Prescrizione di esercizio per la circolazione di convogli diagnostici non ERTMS/ETCS su linea AV/AC Roma - Napoli"
+        },
+        {
+          "file": "PE/PE 172_2007.pdf",
+          "oggetto": "Prescrizione: Linea AC/AV Torino - Novara attrezzata con ERTMS/ETCS Livello 2 - Circolazione convogli diagnostici non muniti di apparecchiature ERTMS/ETCS di bordo."
+        },
+        {
+          "file": "DGI/DGI 23_2008.pdf",
+          "oggetto": "Modalità per la circolazione dei treni ML e dei carrelli sulla linea AV/AC Milano – Bologna attrezzata con ERTMS/ETCS L2"
+        }
+      ]
+    },
+    "RCT": {
+      "impatti_file": null,
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "PE/PE 2169_2015.pdf",
+          "oggetto": "Prescrizione di esercizio per movimenti contemporanei e zona di uscita nella stazione di Bologna Centrale AV"
+        }
+      ]
+    },
+    "IEAC ACL 2022": {
+      "impatti_file": null,
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "PE/PE 3301_2013.pdf",
+          "oggetto": "Prescrizione di esercizio per la stazione di Arezzo"
+        }
+      ]
+    },
+    "IPCL": {
+      "impatti_file": null,
+      "da_citazione": [],
+      "da_contenuto": [
+        {
+          "file": "DGI/DGI 24_2008.pdf",
+          "oggetto": "Istruzione per l'impiego delle chiavi di zona sulla linea AV/AC Milano – Bologna attrezzata con ERTMS/ETCS L2"
+        }
+      ]
+    }
+  },
+  "impatti_non_risolti": [],
+  "documenti_citati_ma_mancanti_in_locale": [
+    {
+      "volume": "BCA",
+      "citato_come": "NOTA 23_1993"
+    },
+    {
+      "volume": "BCA",
+      "citato_come": "ΝΟΤΑ 23_1993"
+    },
+    {
+      "volume": "CTF IFN - edizione 2022",
+      "citato_come": "PE 1202/2023"
+    },
+    {
+      "volume": "IEITE",
+      "citato_come": "NOTA NCR 1184/2022"
+    },
+    {
+      "volume": "IESCMT",
+      "citato_come": "DGI 47/2007"
+    },
+    {
+      "volume": "IRTB",
+      "citato_come": "PE 1526/2025"
+    },
+    {
+      "volume": "IRTB",
+      "citato_come": "PE 1525/2025"
+    },
+    {
+      "volume": "IRTB",
+      "citato_come": "PE 1216/2025"
+    },
+    {
+      "volume": "ISD",
+      "citato_come": "NOTA 137/2015"
+    },
+    {
+      "volume": "ISD",
+      "citato_come": "NOTA 1687/2017"
+    },
+    {
+      "volume": "ISD",
+      "citato_come": "PE 528/2023"
+    },
+    {
+      "volume": "ISD",
+      "citato_come": "NOTA DTC 1284/2024"
+    },
+    {
+      "volume": "ISM",
+      "citato_come": "NOTA DCO 325/2023"
+    },
+    {
+      "volume": "ISM",
+      "citato_come": "NOTA DCO 37/2023"
+    },
+    {
+      "volume": "ISM",
+      "citato_come": "NOTA DTC 1284/2024"
+    },
+    {
+      "volume": "ITLC ristampa 2022",
+      "citato_come": "PE 528/2023"
+    },
+    {
+      "volume": "ACC - A",
+      "citato_come": "Nota 5_1977"
+    },
+    {
+      "volume": "ACC - A",
+      "citato_come": "PE 2186/2024"
+    },
+    {
+      "volume": "ACC - A",
+      "citato_come": "PE 523/2025"
+    },
+    {
+      "volume": "IEAC ACCM",
+      "citato_come": "Nota 5-1977"
+    },
+    {
+      "volume": "IEAC ACCM",
+      "citato_come": "PE 2186-2024"
+    },
+    {
+      "volume": "IEAC ACCM",
+      "citato_come": "PE 523-2025"
+    },
+    {
+      "volume": "IEAC ACCM",
+      "citato_come": "Nota 5-1977"
+    },
+    {
+      "volume": "IEAC ACCM",
+      "citato_come": "PE 2186-2024"
+    },
+    {
+      "volume": "IEAC ACCM",
+      "citato_come": "PE 523-2025"
+    },
+    {
+      "volume": "CTF IFN - edizione 2022",
+      "citato_come": "PE 1202/2023"
+    },
+    {
+      "volume": "CTF IFN - edizione 2022",
+      "citato_come": "PE 1056/2024"
+    },
+    {
+      "volume": "CTF IFN - edizione 2022",
+      "citato_come": "PE 500/2025"
+    },
+    {
+      "volume": "CTF IFN - edizione 2022",
+      "citato_come": "PE 642/2025"
+    },
+    {
+      "volume": "CTF IFN - edizione 2022",
+      "citato_come": "PE 1291/2025"
+    },
+    {
+      "volume": "CTF IFN - edizione 2022",
+      "citato_come": "PE 1639/2025"
+    },
+    {
+      "volume": "CTF IFN - edizione 2022",
+      "citato_come": "PE 386/2025"
+    },
+    {
+      "volume": "CTF IFN - edizione 2022",
+      "citato_come": "PE 531/2025"
+    },
+    {
+      "volume": "IPC (vers. DE n° 14-2018)",
+      "citato_come": "DE 3/2019"
+    },
+    {
+      "volume": "IPC (vers. DE n° 14-2018)",
+      "citato_come": "DE 27/2019"
+    },
+    {
+      "volume": "IPC (vers. DE n° 14-2018)",
+      "citato_come": "NOTA DTC 1284/2024"
+    },
+    {
+      "volume": "IPC (vers. DE n° 14-2018)",
+      "citato_come": "PE 2186/2024"
+    },
+    {
+      "volume": "IPC (vers. DE n° 14-2018)",
+      "citato_come": "PE 523/2025"
+    },
+    {
+      "volume": "IPC",
+      "citato_come": "NOTA DTC 1284/2024"
+    },
+    {
+      "volume": "IPC",
+      "citato_come": "PE 2186/2024"
+    },
+    {
+      "volume": "IPC",
+      "citato_come": "PE 1532/2025"
+    },
+    {
+      "volume": "IPC",
+      "citato_come": "PE 523/2025"
+    },
+    {
+      "volume": "PGOS-RFI",
+      "citato_come": "NOTA 3/2022"
+    },
+    {
+      "volume": "PGOS-RFI",
+      "citato_come": "PE 649/2025"
+    },
+    {
+      "volume": "RCT - Ristampa 2026",
+      "citato_come": "Nota NCR 1184-2022"
+    },
+    {
+      "volume": "RCT - Ristampa 2026",
+      "citato_come": "PE 86-2022"
+    },
+    {
+      "volume": "RCT - Ristampa 2026",
+      "citato_come": "Nota DTC 1284-2024"
+    },
+    {
+      "volume": "RCT - Ristampa 2026",
+      "citato_come": "PE 2186-2024"
+    },
+    {
+      "volume": "RCT - Ristampa 2026",
+      "citato_come": "PE 523-2025"
+    },
+    {
+      "volume": "RCT - Ristampa 2026",
+      "citato_come": "PE 649-2025"
+    },
+    {
+      "volume": "IEPL",
+      "citato_come": "DE 13/2015"
+    },
+    {
+      "volume": "IEPL",
+      "citato_come": "PE 1394/2025"
+    }
+  ],
+  "file_senza_collegamento_chiaro": [
+    {
+      "file": "PE/PE 1566_2014.pdf",
+      "oggetto": "Prescrizione di esercizio. Estensione del campo di applicazione delle Disposizioni di Esercizio n° 25 e 26 del 18/12/2013."
+    },
+    {
+      "file": "PE/PE 1754_2012.pdf",
+      "oggetto": "Prescrizione di esercizio per frenatura di emergenza su Passante AV di Bologna e linea AV/AC Milano-Bologna"
+    },
+    {
+      "file": "PE/PE 2065_2009.pdf",
+      "oggetto": "Prescrizione di esercizio – Accertamento della libertà della tratta tramite QL da parte dell'operatore RBC sulla linea AV/AC Milano - Firenze."
+    },
+    {
+      "file": "PE/PE 3855_2008.pdf",
+      "oggetto": "Prescrizione per il soccorso ai treni con mezzi di trazione non attrezzati con ERTMS/ETCS L2 sulla AV/AC Milano – Bologna."
+    },
+    {
+      "file": "PE/PE 3444_2013.pdf",
+      "oggetto": "Prescrizione di esercizio. Linee AC/AV: servizio in tempo di neve."
+    },
+    {
+      "file": "DGI/DGI 24_2009.pdf",
+      "oggetto": "Disposizione di esercizio n° 24 del 23 DIC. 2009"
+    }
+  ]
+}

@@ -57,6 +57,21 @@ Esistono tre implementazioni separate della stessa logica (carica PDF → chunk 
 
 Il backend gira in un container (Render, con `Dockerfile` che crea `data/pdfs/` vuota a ogni build). Se i PDF vengono caricati via `/upload` direttamente sul servizio deployato (anziché indicizzati da locale con `sync_documents.py`), e il piano Render non ha un disco persistente collegato, quei file vengono persi a ogni redeploy o riavvio. Non è un problema per le risposte in chat (che leggono solo da Supabase), ma lo è per gli endpoint che controllano l'esistenza fisica del file (`file_exists` in `list_indexed_volumes`) e per qualunque futura funzione che debba riaprire il PDF originale (punto 9.2 della roadmap, "Apri a pagina X"). Va verificato se Render ha un persistent disk montato su `data/pdfs`; altrimenti la fonte di verità dei file deve restare Supabase Storage o il disco locale con sync esplicita.
 
+### 3.7 Documenti di arricchimento mancanti nella cartella locale (lacuna aziendale, non di questo progetto)
+
+`data/pdfs/` contiene, oltre ai 29 testi principali, sei sottocartelle di
+arricchimento (`DE`, `DGI`, `IMPATTI`, `NOTE`, `PE`, `RFI-FILE NORMATIVI
+MISTI`, 259 file). Mappando quali file di arricchimento si collegano a quale
+testo principale (metodo e dati completi in `docs/enrichment_mapping.md` /
+`.json`), sono emersi **52 documenti citati esplicitamente da un file
+"impatto" ufficiale RFI come contenenti una modifica**, ma assenti dalla
+cartella locale — quasi tutti datati 2023-2025. Iacopo conferma che la
+cartella locale è copia integrale di quella condivisa aziendale: se mancano
+qui, mancano anche lì. Non è un problema introdotto da questo lavoro né
+risolvibile da codice — va segnalato/recuperato in azienda. Elenco completo
+in `docs/enrichment_mapping.md`, sezione "Documenti citati ma assenti dalla
+cartella locale".
+
 ## 4. Riscrivere da zero o no?
 
 **No.** Non ci sono vincoli architetturali che giustifichino un rewrite: lo stack è corretto per lo scopo, il volume di codice è piccolo (poche centinaia di righe totali), e i problemi individuati sono tutti risolvibili con refactoring mirato, non con una riscrittura. Buttare via il lavoro esistente peggiorerebbe la situazione — perderesti la pipeline RAG già funzionante e testata in produzione (memoria progetto conferma: ricerca semantica operativa, costi tracciati, billing attivo) per ricostruire da capo qualcosa di equivalente.
