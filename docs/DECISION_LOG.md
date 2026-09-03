@@ -294,3 +294,13 @@ prodotto una risposta corretta con fonti multiple e formattazione attesa.
 **Prossimo passo:** commit e push del codice; poi, se Iacopo conferma,
 valutare separatamente un passaggio OCR per i documenti scansionati (costo
 e portata da stimare a parte, non incluso in questo lavoro).
+
+**Idea rimandata (2026-09-03):** dalla risposta, poter cliccare sul numero
+di pagina citato e aprire il PDF originale proprio a quella pagina (i
+browser supportano `#page=N` su un link diretto al PDF). Tecnicamente
+semplice, ma **bloccata da un problema già noto** (AUDIT.md 3.6): i PDF
+veri non esistono sul server Render in produzione, solo il testo estratto
+in Supabase — la cartella `data/pdfs/` riparte vuota a ogni deploy. Serve
+prima decidere dove vivono i PDF in produzione (candidato: Supabase
+Storage, costo piccolo ma reale, da verificare). Iacopo conferma: priorità
+bassa, dopo aver sistemato le fondamenta di oggi — non implementare ora.
