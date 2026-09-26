@@ -152,20 +152,31 @@ def index_enrichment_files() -> Dict[str, int]:
     return {p.name: index_pdf(p) for p in enrichment_file_paths() if p.exists()}
 
 
-def fetch_document_chunks(filename: str) -> List[Dict[str, Any]]:
+def fetch_document_chunks(filename: str, page_size: int = 1000) -> List[Dict[str, Any]]:
+    """Tutti i pezzi di un file, in ordine di pagina (paginato: vedi fetch_all_rows)."""
     supabase = get_supabase()
-    result = (
-        supabase.table("documents")
-        .select("content, page, volume")
-        .eq("filename", filename)
-        .order("page")
-        .execute()
-    )
-    return result.data or []
+    rows: List[Dict[str, Any]] = []
+    start = 0
+    while True:
+        batch = (
+            supabase.table("documents")
+            .select("content, page, volume")
+            .eq("filename", filename)
+            .order("page")
+            .order("id")
+            .range(start, start + page_size - 1)
+            .execute()
+        )
+        data = batch.data or []
+        rows.extend(data)
+        if len(data) < page_size:
+            break
+        start += page_size
+    return rows
 
 
 def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
-    q_embedding = llm_provider.embed([question])[0]
+    q_embedding = llm_provider.embed_query(question)
 
     supabase = get_supabase()
     result   = supabase.rpc(
@@ -197,7 +208,9 @@ def ask(question: str, top_k: int = 6) -> Dict[str, Any]:
     # confermati da un impatto RFI — vedi docs/DECISION_LOG.md 2026-09-03).
     enrichment_map = load_enrichment_map()
     enr_filenames = enrichment_filenames()
-    main_volumes = {doc.get("volume") for doc in docs if doc.get("filename") not in enr_filenames}
+    # dict.fromkeys: senza duplicati ma nell'ordine di pertinenza dei risultati
+    # (un set darebbe un ordine casuale nel prompt da una richiesta all'altra).
+    main_volumes = dict.fromkeys(doc.get("volume") for doc in docs if doc.get("filename") not in enr_filenames)
 
     enrichment_parts = []
     for volume in main_volumes:
@@ -250,7 +263,9 @@ def fetch_all_rows(select_cols: str, page_size: int = 1000) -> List[Dict[str, An
     rows: List[Dict[str, Any]] = []
     start = 0
     while True:
-        batch = supabase.table("documents").select(select_cols).range(start, start + page_size - 1).execute()
+        # .order("id"): senza un ordine esplicito Postgres non garantisce lo
+        # stesso ordinamento tra una pagina e l'altra (righe saltate/doppie).
+        batch = supabase.table("documents").select(select_cols).order("id").range(start, start + page_size - 1).execute()
         data = batch.data or []
         rows.extend(data)
         if len(data) < page_size:

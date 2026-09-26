@@ -1,3 +1,12 @@
+"""Script una tantum (maggio 2026) per reindicizzare solo `IEAC ACCM.pdf`.
+
+Superato da `services/rag.py::index_pdf()`, che fa la stessa cosa ma in
+modo sicuro: questo script NON cancella le righe esistenti prima di
+inserire (duplicati se rilanciato) e non filtra pagine segnaposto né
+caratteri nulli. Preferire `index_pdf()`. Se serve comunque, lanciarlo
+dalla cartella del backend con `python -m services.reindex_ieac_accm`
+(con `python services/reindex_ieac_accm.py` fallisce l'import di `services`).
+"""
 import os
 import time
 from pathlib import Path
