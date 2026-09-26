@@ -3,7 +3,8 @@
 Log delle decisioni prese sessione per sessione, aggiornato nel momento in cui
 vengono prese (non a fine sessione). Formato: cosa deciso, perché, fatto,
 prossimo passo. Per il log strutturato in stile ADR (alternative scartate) vedi
-`docs/DECISIONS.md` una volta creato (punto 7 del piano di consolidamento).
+`docs/DECISIONS.md`. Prima di ogni commit: `python3 scripts/check-coerenza.py`
+(vedi `docs/CHECKLIST_AGGIORNAMENTO.md`).
 
 ---
 
@@ -382,3 +383,163 @@ confermati in produzione).
    controllo a campione — vedi `docs/enrichment_mapping.json`.
 5. **Idea rimandata**: link diretto a pagina PDF — bloccata da dove
    vivono i PDF in produzione (Supabase Storage candidato), priorità bassa.
+
+## 2026-09-26 — Revisione completa del lavoro dal 2026-09-01 (codice + documenti)
+
+Richiesta di Iacopo: rivedere tutte le modifiche fatte da quando l'app
+originale è stata toccata la prima volta (`c5e3ea0` → `3df3290`),
+controllare la coerenza dei documenti e correggere i bug trovati.
+
+**Trovato, non un bug del codice — app live ferma oggi:** l'indirizzo del
+database Supabase (quello in `.env`) non esiste più in rete (nessun record
+DNS) e su Render `/api/documents` risponde "Internal Server Error" (`/health`
+risponde, dopo ~30 s di risveglio). Causa quasi certa: i progetti Supabase
+del piano gratuito vengono **messi in pausa dopo circa una settimana senza
+attività** (ultimo uso: 2026-09-03). Non risolvibile da codice: Iacopo deve
+riattivare il progetto dalla dashboard Supabase ("Restore project"). Nuovo
+punto AUDIT.md 3.12. Da ricordare prima di ogni demo: aprire l'app qualche
+giorno prima, o valutare il piano a pagamento per la presentazione.
+
+**Trovato e corretto — regressione della ricerca introdotta il 2026-09-01
+(`f68df11`):** spostando le chiamate Gemini in `llm_provider.py`, la domanda
+dell'utente veniva trasformata in vettore con `embed()`, cioè come un
+*documento da archiviare* invece che come una *domanda* (prima si usava
+`embed_query`). Il modello di embedding di Gemini è "asimmetrico": produce
+vettori diversi nei due casi (verificato con chiamata reale: somiglianza
+0,907 invece di 1 per lo stesso testo). Effetto: ricerca meno precisa, con
+un vantaggio per i pezzi di testo brevi e generici — probabile concausa
+del caso "Cos'è il BCA?" del 2026-09-03 (pezzi quasi vuoti ai primi posti).
+**Corretto:** nuovo `embed_query()` in `LLMProvider`/`GeminiProvider`,
+usato da `ask()`. Nessuna reindicizzazione necessaria (i documenti erano
+già archiviati nel modo giusto). **Non verificato sul database reale**
+(Supabase in pausa, vedi sopra): da ripetere la domanda "Cos'è il BCA?"
+appena il database è riattivo.
+
+**Trovati e corretti — bug minori:**
+1. `llm_provider.py` leggeva `GEMINI_API_KEY` al momento dell'import:
+   `reindex_ieac_accm.py`, che chiama `load_dotenv()` *dopo* l'import,
+   trovava la chiave vuota e si fermava. Ora letta alla creazione del
+   provider. Verificato.
+2. Se Gemini non restituisce testo (filtro di sicurezza, token finiti),
+   `generate()` restituiva `None` → il frontend andava in errore su
+   `data.answer.replace` e mostrava il generico "Errore di connessione al
+   backend" (stesso messaggio di AUDIT.md 3.11, quindi indistinguibile).
+   Ora restituisce un messaggio chiaro.
+3. `fetch_document_chunks()` (testo intero di un aggiornamento in `ask()`)
+   non era paginata: stesso limite silenzioso di 1000 righe di AUDIT.md 3.9.
+   Ora paginata.
+4. `fetch_all_rows()` paginava senza un ordine esplicito: Postgres non
+   garantisce lo stesso ordine tra una pagina e l'altra (righe saltate o
+   doppie possibili). Aggiunto `.order("id")`.
+5. L'ordine degli aggiornamenti nel prompt era casuale tra una richiesta e
+   l'altra; ora segue la pertinenza dei risultati.
+Tutto verificato con un test offline (Supabase e Gemini simulati, 2.500
+righe per forzare la paginazione) + un controllo di sintassi Python 3.11.
+`reindex_ieac_accm.py`: aggiunta solo un'avvertenza in testa (script
+superato da `index_pdf()`, non cancella prima di inserire → duplicati se
+rilanciato), non modificata la logica.
+
+**Deciso:** aggiungere `docs/CHECKLIST_AGGIORNAMENTO.md` +
+`scripts/check-coerenza.py`, da lanciare prima di ogni commit.
+**Perché:** regola generale nuova di Iacopo (2026-09-26, nata in
+fanta-athletic): ogni modifica si porta dietro i documenti che la
+raccontano. Al primo lancio lo script ha trovato subito `BLUEPRINT.md`
+fermo al 2026-09-01 (descriveva ancora la tabella `documents` come vuota).
+**Fatto:** allineati a oggi `BLUEPRINT.md` (flusso arricchimento, stato
+reale del DB), `AUDIT.md` (stato "risolto/aperto" per ogni punto, nuovi
+3.12-3.13), `DECISIONS.md` (nuova voce sull'arricchimento),
+`CHECKLIST_AGGIORNAMENTO.md`, e il `CLAUDE.md` tampone in
+`ferroteca-app-code/` (percorsi di `keys.rtf`/`env` superati: sono in
+`_archivio-personale/` dal 2026-09-01). Quest'ultimo è fuori dal repository
+git: aggiornato ma non committabile.
+
+**Segnalato, non toccato (decisioni di Iacopo):**
+- **Sicurezza, ancora aperto dal 1° settembre (AUDIT.md 3.2):** upload,
+  reindicizzazione e **cancellazione** documenti sono senza protezione —
+  chiunque conosca l'indirizzo Render può cancellare volumi dalla libreria.
+  Da chiudere prima di mostrare l'app fuori.
+- 10 volumi presenti nella mappatura (es. `ACC - A`, `ACE`, `ACEI`, `RCT`)
+  non hanno un testo principale in `data/pdfs/`: i loro aggiornamenti sono
+  indicizzati ma vengono aggiunti in `ask()` solo se trovati direttamente
+  dalla ricerca, mai "al seguito" di un volume.
+- `ask()` fa una richiesta a Supabase per ogni aggiornamento collegato (fino
+  a 24 per `RCT - Ristampa 2026`) e mette il loro testo intero nel prompt:
+  risposte più lente e più costose su alcuni volumi. Da misurare a database
+  riattivo prima di decidere se serve ottimizzare.
+- La domanda aperta del 2026-09-01 sul frontmatter Hugging Face in
+  `README.md` non ha mai avuto risposta.
+- Credenziali: `_archivio-personale/keys.rtf` ed `env` restano da ruotare
+  ed eliminare (AUDIT.md 3.4).
+
+**Deciso (Iacopo, stesso giorno):** i punti "segnalati, non toccati" sopra
+restano annotati per una prossima sessione; commit + push di questa
+revisione dopo la verifica con Supabase riattivato (Iacopo ha avviato il
+ripristino).
+
+**Fatto — riordino della cartella di lavoro `ferroteca-app-code/`** (su
+richiesta di Iacopo; tutto spostato nel Cestino del Mac in
+`ferroteca-pulizia-2026-09-26/`, recuperabile, nulla cancellato
+definitivamente):
+- `data/pdfs/` vuota al livello superiore — creata per errore il
+  2026-09-03 (`rag.py` crea `data/pdfs` relativa alla cartella da cui lo
+  si lancia): nel Cestino.
+- `_archivio-personale/Testi normativi/IEAC ACL 2022.pdf` — copia identica
+  (stessa impronta SHA-1) di quella in `data/pdfs/`: nel Cestino.
+- `_archivio-personale/File Backup funzionanti/documents.py` e
+  `requirements.txt` — identici a versioni già nella cronologia git
+  (`013d393`): nel Cestino. Tenuti `rag.py` (non presente in git, unica
+  copia) ed `env` (credenziali, non si sposta).
+- `ferroteca-backend/services/__pycache__/` (file generati, ignorati da
+  git): nel Cestino.
+- `Claude outputs/domande_pilota_demo.md` → `docs/DOMANDE_PILOTA_DEMO.md`
+  (ora nel repository, con backup su GitHub); cartella vuota rimossa.
+- Aggiunto `_archivio-personale/LEGGIMI.md` (cosa c'è e perché);
+  `CLAUDE.md` di primo livello aggiornato con la nuova struttura.
+Non toccati: `data/pdfs/` del backend, `keys.rtf`, `env`, `HTML prova/`
+(unica cronologia del frontend), `Ferroteca_Presentazione.pdf`.
+
+**Verificato con Supabase riattivato (stesso giorno):** app live di nuovo
+funzionante (`/api/documents` → 27 volumi). Confronto sul database reale
+della ricerca vecchia vs nuova, stessa domanda "Cos'è il BCA?":
+- **vecchia** (domanda trattata come documento): 6 risultati su 6 senza
+  contenuto utile — "Pag. 8 di 44", "(continua nella pagina seguente)",
+  "INDICE INDICE", segnali del volume BA;
+- **nuova** (`embed_query`): BCA p.23 (definizione del blocco conta assi),
+  BCA p.151, IEAC ACCM pp.198/466 — tutti pertinenti.
+`ask()` completo con il codice nuovo: risposta corretta con fonti in 13,7 s
+(il 2026-09-03 la stessa domanda dava "Non presente nei manuali caricati").
+Conferma che il problema "quasi vuoti" del 2026-09-03 era in gran parte
+causato da questa regressione, non solo dal contenuto dei PDF: il punto
+AUDIT 3.10 (testo corrotto) resta vero ma pesa meno di quanto sembrava.
+Totale pezzi in tabella: 26.855 (= 26.920 − 65 segnaposto rimossi).
+
+**Misurato — peso dell'arricchimento in `ask()`:** `RCT - Ristampa 2026`
+aggiunge 12 aggiornamenti con testo (dei 24 collegati), ~170.000 caratteri
+(~43.000 token, circa 1 centesimo di dollaro a domanda con Gemini 2.5 Flash)
+e ~4,6 s solo per leggerli da Supabase; `RS Ristampa 2026` ~38.000 token e
+3,2 s; `ISD` ~7.000 token e 2,4 s. La libreria impiega ~3 s (27 letture
+paginate di tutta la tabella).
+
+**Punti aperti per la prossima sessione, in ordine di priorità:**
+1. **Sicurezza (AUDIT 3.2)** — proteggere upload/reindex/cancellazione
+   prima di mostrare l'app fuori. Chiunque conosca l'indirizzo può oggi
+   cancellare volumi.
+2. **Credenziali (AUDIT 3.4)** — Iacopo ruota le chiavi di `keys.rtf` ed
+   `env` e poi li elimina.
+3. **Supabase gratuito in pausa (AUDIT 3.12)** — decidere come evitarlo
+   prima della demo (uso regolare o piano a pagamento temporaneo).
+4. **Tempi/costi di `ask()`** su volumi con molti aggiornamenti — misurati
+   sopra (fino a ~43.000 token e ~4,6 s in più per `RCT - Ristampa 2026`):
+   decidere se unire le letture a Supabase in una sola richiesta e/o
+   aggiungere solo le parti pertinenti degli aggiornamenti invece del testo
+   intero. Anche la libreria (~3 s) si può velocizzare con una funzione SQL
+   che restituisca solo i nomi dei volumi.
+5. **10 volumi mappati senza testo principale** (`ACC - A`, `ACC - B -
+   ERTMS ETCS L2`, `ACE`, `ACEI`, `DELB`, `DET`, `DETE 2023`, `IESBE`,
+   `IPCL`, `RCT`) — capire se mancano testi da caricare o se sono nomi
+   diversi dello stesso volume (es. `RCT` vs `RCT - Ristampa 2026`).
+6. **README.md con frontmatter Hugging Face** — Iacopo conferma se esiste
+   uno Space HF attivo; se no, riscrivere il README come documento vero.
+7. Restano validi i punti della sessione 2026-09-03: testo corrotto (AUDIT
+   3.10), OCR delle scansioni (3.8), 52 documenti mancanti (3.7), 125
+   collegamenti "da contenuto" da verificare, link diretto a pagina PDF.

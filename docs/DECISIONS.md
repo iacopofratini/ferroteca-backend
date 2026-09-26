@@ -1,3 +1,5 @@
+Allineato a: 2026-09-26 — vedi ultima voce di `docs/DECISION_LOG.md`
+
 # Ferroteca — Decision Log (ADR leggero)
 
 Formato: data, decisione, alternative scartate, motivazione. Per il log
@@ -63,6 +65,33 @@ i parametri sono definiti elimina la classe di bug "due file, due
 configurazioni diverse". Secondo, il provider è dichiaratamente provvisorio
 (Gemini scelto solo per costo in fase di test) — cambiarlo in futuro
 significa toccare un file, non cacciare le chiamate SDK sparse nel codice.
+
+**Da sapere (2026-09-26):** l'interfaccia distingue `embed()` (testi da
+archiviare) da `embed_query()` (domande dell'utente). Molti modelli di
+embedding, Gemini compreso, trattano diversamente i due casi: confonderli
+peggiora la ricerca senza errori visibili (AUDIT.md 3.13). Un provider
+futuro deve implementare entrambi, anche se per lui coincidono.
+
+## Perché l'arricchimento solo "da citazione", aggiunto intero al prompt
+
+**Stato:** Deciso e fatto (2026-09-03).
+
+**Decisione:** quando la ricerca trova un testo principale, `ask()` aggiunge
+il testo intero degli aggiornamenti (Note/DE/PE/DGI) collegati a quel testo,
+ma solo i collegamenti citati da un file "impatto" ufficiale RFI (98 file);
+i 125 collegamenti suggeriti da Gemini leggendo il contenuto restano esclusi.
+
+**Alternative scartate:** affidarsi solo alla ricerca per similarità anche
+per gli aggiornamenti — scartata perché un aggiornamento breve ("al punto
+4.2 sostituire X con Y") raramente somiglia alla domanda, e verrebbe perso
+proprio quando cambia la risposta; usare anche i collegamenti "da
+contenuto" — rimandata finché non c'è un controllo a campione (il modello
+ha inventato almeno un codice testo inesistente).
+
+**Motivazione:** la risposta deve riflettere lo stato normativo in vigore,
+non solo il testo alla sua data di stampa. Il costo è un prompt più lungo
+sui volumi con molti aggiornamenti (da misurare, vedi DECISION_LOG
+2026-09-26).
 
 ## Perché Supabase Auth ora, non SSO aziendale
 

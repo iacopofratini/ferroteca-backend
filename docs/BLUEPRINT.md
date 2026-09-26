@@ -1,4 +1,4 @@
-Allineato a: 2026-09-01 — vedi ultima voce di `docs/DECISION_LOG.md`
+Allineato a: 2026-09-26 — vedi ultima voce di `docs/DECISION_LOG.md`
 
 # Ferroteca — Blueprint architetturale
 
@@ -22,12 +22,14 @@ esistesse già. Questo è il documento da usare in presentazione aziendale.
 │  routers/documents.py │  upload / reindex / delete — OGGI SENZA AUTH
 │  routers/chat.py      │  /api/chat/ask — OGGI SENZA AUTH
 │  services/rag.py      │  logica RAG: chunking, ricerca, prompt
+│  docs/enrichment_      │  quali aggiornamenti (Note/DE/PE/DGI)
+│   mapping.json        │  modificano quale testo principale
 └──────────┬───────────┘
            │
            ▼
 ┌─────────────────────┐
 │  services/llm_provider │  unico punto che parla col provider AI
-│  (GeminiProvider oggi) │  embed() / generate() — vedi DECISIONS.md
+│  (GeminiProvider oggi) │  embed() / embed_query() / generate()
 └──────────┬───────────┘
            │
            ▼
@@ -48,6 +50,23 @@ condizione posta dal punto 4 del piano di consolidamento per rendere
 plausibile una futura migrazione (es. Azure Container Apps) senza
 riscrittura. Non ancora fatto.
 
+**Come risponde a una domanda (`ask()`, dal 2026-09-03):**
+1. la domanda diventa un vettore (`embed_query`, modalità "domanda");
+2. Supabase restituisce i 6 pezzi di testo più simili (RPC `match_documents`);
+3. per ogni testo principale tra i risultati, `ask()` aggiunge il testo
+   intero degli aggiornamenti collegati "certi" (citati da un file impatto
+   ufficiale RFI, `da_citazione` in `enrichment_mapping.json`) in una
+   sezione separata "AGGIORNAMENTI CORRELATI" del prompt;
+4. Gemini risponde solo da quei testi, citando volume e pagina e segnalando
+   se un aggiornamento modifica il testo principale.
+
+La libreria dell'app mostra solo i testi principali: gli aggiornamenti
+sono indicizzati ma nascosti dall'elenco (non sono libri a sé).
+
+**Vincolo di produzione:** su Render la cartella `data/pdfs/` è vuota
+(AUDIT.md 3.6). A runtime sono affidabili solo Supabase e i file nel
+repository (`docs/enrichment_mapping.json`), mai i PDF su disco.
+
 ## 2. Schema reale del database (verificato via Supabase REST, 2026-09-01)
 
 Tabelle effettivamente esposte oggi: **solo `documents` e `sync_registry`.**
@@ -66,8 +85,12 @@ dei punti 3 e 5 del piano, non ancora implementati.
 | `embedding` | vettore pgvector |
 | `created_at` | timestamp inserimento |
 
-Svuotata il 2026-09-01 dopo la scoperta del bug sul modello di embedding
-(vedi `DECISION_LOG.md`) — in attesa di ricaricamento pulito.
+Svuotata il 2026-09-01 dopo la scoperta del bug sul modello di embedding,
+ripopolata da zero il 2026-09-03: 29 testi principali + 98 aggiornamenti
+"certi", 26.920 pezzi (meno le 65 pagine segnaposto rimosse lo stesso
+giorno). 2 testi principali e 63 aggiornamenti sono scansioni senza testo
+e non producono pezzi (AUDIT.md 3.8). Piano Supabase gratuito: il progetto
+va in pausa dopo circa una settimana di inattività (AUDIT.md 3.12).
 
 ### `sync_registry` (usata solo da `sync_documents.py`)
 
@@ -110,10 +133,8 @@ Da verificare con l'azienda prima di un eventuale go-live, non assunzioni:
   presentazione, non è dato per scontato che lo restino dopo un'eventuale
   adozione ufficiale. Lo stack aziendale è Microsoft 365/Copilot — verosimile
   ma non confermato un'eventuale migrazione ad Azure (Container Apps).
-- **Persistenza dei PDF caricati**: da verificare se il piano Render ha un
-  disco persistente collegato a `data/pdfs/` — altrimenti i file caricati
-  via `/upload` (non tramite sync da locale) si perdono a ogni redeploy
-  (AUDIT.md 3.6). Non blocca le risposte in chat (che leggono solo da
+- **Persistenza dei PDF caricati**: piano Render gratuito, nessun disco
+  persistente — `data/pdfs/` riparte vuota a ogni deploy (AUDIT.md 3.6). Non blocca le risposte in chat (che leggono solo da
   Supabase), ma blocca funzioni che riaprono il PDF originale.
 - **Integrazione OneDrive**: dipende dalla conferma aziendale sui permessi
   Microsoft 365 — va tenuta disaccoppiata (es. dietro un flag) finché quella

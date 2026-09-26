@@ -1,5 +1,25 @@
+Allineato a: 2026-09-26 — vedi ultima voce di `docs/DECISION_LOG.md`
+
 # Ferroteca — Audit tecnico e architetturale
-*Data: 1 settembre 2026*
+*Data: 1 settembre 2026 — stato dei punti aggiornato al 26 settembre 2026*
+
+## Stato dei punti in breve
+
+| Punto | Stato |
+|---|---|
+| 3.1 Pipeline con embedding diversi | **Risolto** (2026-09-01, `llm_provider.py`); `sync_documents.py` resta non eseguibile (schema, vedi DECISION_LOG) |
+| 3.2 Endpoint di scrittura senza autenticazione | **Aperto — priorità alta** |
+| 3.3 Frontend non versionato | Aperto |
+| 3.4 Credenziali (`keys.rtf`, `env`) | Aperto: spostate in `_archivio-personale/`, da ruotare ed eliminare a mano |
+| 3.5 Pulizia repository | Quasi tutto fatto (2026-09-01); resta il frontmatter HF in `README.md` (in attesa di risposta) |
+| 3.6 PDF non persistenti su Render | Aperto (blocca "apri a pagina X") |
+| 3.7 52 documenti mancanti | Lacuna aziendale, fuori dal codice |
+| 3.8 PDF scansionati senza testo | Aperto (OCR da decidere) |
+| 3.9 Limite 1000 righe Supabase | **Risolto** (2026-09-03, esteso il 2026-09-26) |
+| 3.10 Testo corrotto (font) | Aperto |
+| 3.11 Risveglio Render gratuito | Limite noto, non un bug |
+| 3.12 Supabase gratuito in pausa | Riattivato il 2026-09-26; **il rischio resta** (si ripete dopo ~1 settimana senza uso) |
+| 3.13 Domanda trasformata in vettore come documento | **Risolto e verificato live** (2026-09-26) |
 
 ## 1. Cos'è, oggi
 
@@ -50,8 +70,9 @@ Esistono tre implementazioni separate della stessa logica (carica PDF → chunk 
 
 - `services/data/pdfs/` — cartella vuota, residuo di una struttura precedente (i PDF ora vivono in `data/pdfs/`).
 - `File Backup funzionanti/` — versioni vecchie di `documents.py` e `rag.py` sciolte nella cartella radice, fuori da git, senza indicazione di quando risalgano o perché siano state tenute.
+- *(Risolto 2026-09-01: `venv/` rimosso e aggiunto a `.gitignore`, cartelle di backup spostate in `_archivio-personale/`.)*
 - `venv/` dentro `ferroteca-backend/` — l'ambiente virtuale Python è fisicamente nella cartella del progetto; il `.gitignore` attuale (`__pycache__/`, `*.pyc`, `.env`, `data/pdfs/`, `*.pdf`) **non esclude `venv/`**. L'indice git risulta piccolo (939 byte, quindi verosimilmente venv non è mai stato aggiunto), ma è una svista da correggere subito aggiungendo `venv/` al `.gitignore` prima che qualcuno lanci un `git add -A` distratto.
-- Dipendenze non pinnate in `requirements.txt` (`google-genai>=1.7.0`, `supabase>=2.15.0`, `httpx>=0.28.1` senza upper bound): un aggiornamento a monte di queste librerie può rompere silenziosamente il backend in produzione senza che tu abbia cambiato una riga di codice.
+- *(Risolto 2026-09-01)* Dipendenze non pinnate in `requirements.txt` (`google-genai>=1.7.0`, `supabase>=2.15.0`, `httpx>=0.28.1` senza upper bound): un aggiornamento a monte di queste librerie può rompere silenziosamente il backend in produzione senza che tu abbia cambiato una riga di codice.
 
 ### 3.6 Persistenza dei PDF sul deploy
 
@@ -94,6 +115,8 @@ lavoro e un costo separati, da decidere con Iacopo, non implementato oggi).
 mostrata nell'app risultava troncata (9 volumi invece di 27) — non un errore
 di visibile, un troncamento silenzioso di Supabase/PostgREST. Corretto lo
 stesso giorno con una lettura paginata (`fetch_all_rows` in `services/rag.py`).
+Il 2026-09-26 estesa anche a `fetch_document_chunks` (testo degli
+aggiornamenti in `ask()`) e resa stabile con un ordine esplicito (`id`).
 
 ### 3.10 Testo corrotto in alcuni PDF (font con codifica non standard) — aperto
 
@@ -136,6 +159,28 @@ risveglio da un altro tipo di errore di rete. Non richiede una correzione
 di codice: è un limite noto del piano gratuito, non un bug. Se il problema
 si ripete anche **non** subito dopo un'inattività prolungata, va trattato
 come anomalia vera, non più come questa ipotesi.
+
+### 3.12 Progetto Supabase gratuito in pausa per inattività — aperto
+
+Scoperto il 2026-09-26: l'indirizzo del database Supabase non risponde più
+(nessun record DNS) e l'app live restituisce "Internal Server Error" sulla
+libreria. I progetti Supabase del piano gratuito vengono messi in pausa dopo
+circa una settimana senza richieste (ultimo uso: 2026-09-03). Dati non persi:
+si riattiva dalla dashboard Supabase ("Restore project"), operazione che può
+fare solo Iacopo dal suo account. **Rischio per la presentazione:** se l'app
+resta inutilizzata per giorni prima della demo, sarà ferma — aprirla con
+anticipo, oppure valutare il piano a pagamento per il periodo della demo.
+
+### 3.13 Domanda trasformata in vettore come se fosse un documento — risolto
+
+Introdotto il 2026-09-01 (`f68df11`, creazione di `llm_provider.py`),
+corretto il 2026-09-26: `ask()` usava `embed()` (modalità "documento da
+archiviare") invece della modalità "domanda" per la domanda dell'utente.
+Il modello Gemini produce vettori diversi nei due casi, quindi la ricerca
+era meno precisa senza nessun errore visibile. Ora `llm_provider.embed_query()`.
+Verificato live lo stesso giorno: "Cos'è il BCA?" passa da 6 risultati
+vuoti ("Pag. 8 di 44", "INDICE") a 6 pagine pertinenti di BCA/IEAC ACCM, e
+da "Non presente nei manuali" a una risposta corretta con fonti.
 
 ## 4. Riscrivere da zero o no?
 
