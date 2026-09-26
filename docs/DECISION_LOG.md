@@ -543,3 +543,38 @@ paginate di tutta la tabella).
 7. Restano validi i punti della sessione 2026-09-03: testo corrotto (AUDIT
    3.10), OCR delle scansioni (3.8), 52 documenti mancanti (3.7), 125
    collegamenti "da contenuto" da verificare, link diretto a pagina PDF.
+
+**Chiusura sessione 2026-09-26 — richiesta di Iacopo per la prossima:**
+**a inizio della prossima sessione, prima di ogni altro lavoro, spiegargli
+bene (linguaggio semplice, con un'analogia) quale bug causava l'errore di
+ricerca.** Traccia della spiegazione:
+- *Cosa fa la ricerca:* ogni pezzo di manuale è archiviato come una
+  "impronta" numerica del suo significato (vettore); anche la domanda
+  diventa un'impronta, e si cercano le impronte più vicine.
+- *Il dettaglio decisivo:* il modello di Gemini produce impronte diverse
+  per lo stesso testo a seconda che gli si dica "questo è un documento da
+  archiviare" o "questa è una domanda di chi cerca" (modalità
+  `RETRIEVAL_DOCUMENT` vs `RETRIEVAL_QUERY`). È fatto apposta: una domanda
+  ("Cos'è il BCA?") e la pagina che la risponde non si somigliano come
+  frasi, e la modalità "domanda" le avvicina.
+- *Il bug:* il 2026-09-01, riordinando il codice (tutte le chiamate a
+  Gemini spostate in `llm_provider.py`, commit `f68df11`), la domanda ha
+  iniziato a passare dalla funzione pensata per i documenti (`embed()`)
+  invece che da quella per le domande (prima `embed_query`). Nessun
+  errore visibile: la ricerca funzionava, ma confrontava "domanda vestita
+  da documento" con documenti.
+- *Perché proprio pezzi vuoti:* trattata come documento, una domanda breve
+  e generica somiglia di più ad altri testi brevi e generici ("Pag. 8 di
+  44", "INDICE", "continua nella pagina seguente") che alla pagina che
+  contiene la risposta. Analogia possibile: cercare in biblioteca scrivendo
+  la richiesta come se fosse la scheda di un libro — il bibliotecario
+  trova schede che *sembrano* la tua, non i libri che *rispondono*.
+- *Prova:* stessa domanda sul database reale — prima 6 risultati su 6
+  vuoti e "Non presente nei manuali", dopo la correzione 6 pagine
+  pertinenti di BCA/IEAC ACCM e risposta corretta (verificato anche sul
+  sito live dopo il push `58ac4f3`).
+- *Lezione:* un riordino "a parità di funzionamento" può cambiare un
+  dettaglio invisibile; per questo ora `DECISIONS.md` e la docstring di
+  `llm_provider.py` spiegano la differenza `embed()`/`embed_query()`.
+Il cestino con i file tolti dal riordino lo svuota Iacopo a mano.
+
